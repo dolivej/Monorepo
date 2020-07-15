@@ -1,0 +1,45 @@
+{
+  "name": "@locnest/component-library",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "private": true,
+  "scripts": {
+    "story": "start-storybook -p 60800",
+    "build-lib": "npm run clean && tsc && npm run copy-styles",
+    "build-dev-site": "build-storybook -c .storybook -o .out",
+    "clean": "rimraf lib/* && rimraf .out/*",
+    "copy-styles": "copyfiles -f src/styles/*.sass lib/styles/"
+  },
+  "peerDependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "bulma": "^0.8.2",
+    "msal": "^1.3.1",
+    "react": "^16.13.1",
+    "react-hook-form": "^5.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@storybook/addon-knobs": "^5.3.18",
+    "@storybook/react": "^5.3.18",
+    "@types/storybook__react": "^5.2.1",
+    "@types/yup": "^0.28.3",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.1.0",
+    "bulma": "^0.8.2",
+    "copyfiles": "^2.2.0",
+    "dotenv": "^8.2.0",
+    "node-sass": "^4.14.1",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^8.0.2",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.2.1",
+    "typescript": "^3.9.2"
+  },
+  "dependencies": {
+    "react-hook-form": "^5.7.2",
+    "react-spring": "^8.0.27",
+    "react-typical": "^0.1.3"
+  }
+}

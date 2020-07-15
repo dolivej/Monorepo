@@ -1,0 +1,17 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-react",
+        "tslint-react-hooks"
+    ],
+    "jsRules": {},
+    "rules": {
+      "quotemark": [true, "single", "jsx-double"],
+      "interface-name": [false],
+      "jsx-no-multiline-js": [false],
+      "react-hooks-nesting": "error",
+      "semicolon": false
+    },
+    "rulesDirectory": []
+}

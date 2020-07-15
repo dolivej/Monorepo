@@ -1,0 +1,22 @@
+{
+  "name": "front-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "components/*",
+    "sites/*"
+  ],
+  "scripts": {
+    "stories": "lerna run story --stream",
+    "publish-storybook": "lerna run build-dev-site --stream",
+    "build-components": "lerna run build-lib",
+    "publish-sites": "lerna run build",
+    "lerna": "lerna"
+  },
+  "devDependencies": {
+    "lerna": "^3.21.0"
+  }
+}
