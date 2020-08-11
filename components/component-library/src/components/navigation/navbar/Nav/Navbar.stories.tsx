@@ -8,7 +8,7 @@ import NavHover from "../NavHover/index";
 import NavLink from "../NavLink/index";
 import NavGroup from "../NavGroup/index";
 
-storiesOf("Navigate/Navbar", module)
+storiesOf("Navigation/Navbar", module)
   .addDecorator(withKnobs)
   .add("example", () => (
     <div>

@@ -43,31 +43,31 @@ export class Nav extends React.Component<
   };
 
   render() {
-    const style = {
-      boxShadow: "rgba(0, 0, 0, 0.1) 0px 5px 20px",
-    };
-
     return (
-      <nav
-        className="navbar is-fixed-top"
-        role="navigation"
-        aria-label="main navigation"
-        style={style}
-      >
+      <nav className="navbar" role="navigation" aria-label="main navigation">
         {/* Contains logo and mobile menu button */}
         <div className="container">
           <div className="navbar-brand">
             <a className="navbar-item" href="">
-              <img
-                src="https://i.ibb.co/cwF4qcH/logo.png"
-                alt="LOGO"
-                height="60"
-                width="70"
-              />
-              <h1 className="is-primary-font is-primary-color">
-                {" "}
-                <b>David Olive</b>
-              </h1>
+              <div className="tags has-addons">
+                <span
+                  className="tag is-medium is-primary"
+                  style={{ padding: "5px" }}
+                >
+                  {" "}
+                  <h1 className="title is-4">⚡</h1>{" "}
+                </span>
+                <span
+                  className="tag is-medium"
+                  style={{
+                    backgroundColor: "white",
+                    border: "solid 2px #fad052",
+                  }}
+                >
+                  {" "}
+                  <h1 className="title is-4">David Olive</h1>
+                </span>
+              </div>
             </a>
 
             <a

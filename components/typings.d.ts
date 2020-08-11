@@ -13,3 +13,8 @@ declare module "*.css" {
   const classNames: IClassNames;
   export = classNames;
 }
+
+declare module "react-resize-detector" {
+  const content: any;
+  export default content;
+}

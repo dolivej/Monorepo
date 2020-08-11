@@ -1,0 +1,205 @@
+@import './david-brand.sass'
+
+//avatar 
+.avatar-container 
+    height: 128px
+    width: 128px
+    overflow: hidden
+    border: 2px
+    border-style: solid
+    border-radius: 50%
+    z-index: 0
+
+
+.avatar-picture 
+    background-image: url()
+    background-size: cover
+    background-position: center center
+    height: 100%
+    width: 100%
+
+
+.avatar-status-indicator 
+    position: absolute
+    right: 0px
+    bottom: 1px
+    height: 33px
+    width: 33px
+    border-radius: 50%
+    border-width: 2px
+    border-style: solid
+    background: rgb(0, 189, 165)
+
+
+.avatar-profile-container 
+    position: relative
+    display: inline-flex
+
+
+
+
+
+//chat bubbles
+
+.bubbles-message-container-left 
+    position: relative
+    min-height: 32px
+    background-color: rgb(234, 240, 246)
+    color: rgb(66, 91, 118)
+    max-width: 284px
+    border-color: rgb(203, 214, 226)
+    border-radius: 0px 8px 8px
+    margin-left: 32px
+    margin-bottom: 8px
+
+
+.bubbles-message-container-left-full 
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    padding-left: 8px
+
+
+.bubbles-text-container-left 
+    padding: 8px 16px
+
+
+.bubbles-message-container-right 
+    position: relative
+    min-height: 32px
+    color: rgb(255, 255, 255)
+    max-width: 284px
+    border-radius: 8px 0px 8px 8px
+    margin-left: 32px
+    margin-bottom: 8px
+    background-color: $primary
+
+
+.bubbles-message-container-right-outer 
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+    padding-left: 8px
+    padding-bottom: 4px
+    padding-left: 10px
+    padding-right: 40px
+
+
+.bubbles-text-container-right 
+    padding: 8px 16px
+
+
+.bubbles-message-title 
+    display: flex
+    height: 16px
+    align-items: center
+    margin-top: 4px
+    margin-bottom: 4px
+    width: 100%
+
+
+.bubbles-avatar-container 
+    align-items: center
+    display: flex
+    background-color: transparent
+    border-color: transparent
+
+
+.bubbles-name-container 
+    margin-left: 5px
+
+
+
+//icon
+
+.icon-holder 
+    position: absolute
+    bottom: 0
+    padding-bottom: 16px
+    padding-right: 14px
+    right: 0px
+
+
+
+.icon-holder-inside 
+    display: flex
+    padding-left: 24px
+    padding-top: 20px
+
+.chatIcon
+    background-color: $primary
+
+
+//popup
+
+.popup-chat-widget-container 
+    position: relative
+    height: 530px
+    width: 396px
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 20px
+    background: rgb(255, 255, 255)
+    border-radius: 8px
+    margin-bottom: 70px
+
+
+.popup-header-container 
+    height: 60px
+    border-bottom: 1px solid rgb(234, 240, 246)
+    border-radius: 4px 4px 0px 0px
+
+
+.popup-subheader-container 
+    align-items: center
+    color: rgb(255, 255, 255)
+    display: flex
+    height: 100%
+    padding: 9px
+    background-color: $primary
+
+
+.popup-subheader-content 
+    display: flex
+    align-items: center
+
+
+.popup-subheader-text 
+    padding-left: 12px
+    padding-right: 12px
+
+
+.popup-text 
+    font-weight: 600
+
+
+.popup-message-container 
+    display: flex
+    flex-direction: column
+    padding-left: 10px
+    min-height: 405px
+    max-height: 405px
+    font-size: 14px
+    overflow-y: scroll
+    overflow-x: hidden
+
+
+.popup-sender-container 
+    display: flex
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    max-height: 60px
+
+
+.popup-sender 
+    display: flex
+    padding: 8px
+    max-width: 100%
+
+
+.popup-send-button 
+    flex-basis: 18%
+    margin-left: 8px
+    padding-right: 8px
+    padding-left: 8px
+

@@ -1,9 +1,8 @@
 module.exports = {
   siteMetadata: {
-    name: `Hello Typescript World!`,
-    tagline: `Gatsby + SASS + Typescript = 💪`,
-    title: "Rental Match",
-    subtitle: "Get your background check!",
+    title: "David Olive",
+    description: "⚡ Full-Stack Developer ⚡",
+    author: "David Olive",
   },
   plugins: [
     `gatsby-plugin-sass`,

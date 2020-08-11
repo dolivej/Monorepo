@@ -38,7 +38,10 @@
     "typescript": "^3.9.2"
   },
   "dependencies": {
+    "@microsoft/applicationinsights-react-js": "^3.0.2",
+    "@microsoft/applicationinsights-web": "^2.5.7",
     "react-hook-form": "^5.7.2",
+    "react-markdown": "^4.3.1",
     "react-spring": "^8.0.27",
     "react-typical": "^0.1.3"
   }

@@ -1,16 +1,5 @@
-const React = require('react')
-const { Helmet } = require('react-helmet')
-const { Layout } = require('./src/components/Layout')
+const React = require("react");
 
 exports.wrapRootElement = ({ element }) => {
-  return (
-    <>
-    <Helmet>
-      <html className="has-navbar-fixed-top" />
-    </Helmet>
-    <Layout>
-      {element}
-    </Layout>
-    </>
-  )
-}
+  return <div className="customScrollBar">{element}</div>;
+};
