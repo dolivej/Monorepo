@@ -1,30 +1,27 @@
-- [Locnest Frontend Monorepo](#locnest-frontend-monorepo)
+- [About](#about)
   - [Getting Started](#getting-started)
   - [Components](#components)
     - [Component Library](#component-library)
   - [Sites](#sites)
-    - [Tenant Portal](#tenant-portal)
-    - [Landlord Portal](#landlord-portal)
-    - [Marketing Site](#marketing-site)
+    - [Personal Site](#tenant-portal)
   - [Tips and Tools](#tips-and-tools)
 
-# Locnest Frontend Monorepo
+# About
 
-This repository contains the front end libraries, sites, and other front end assets.
+This repository contains a frontend monorepo which contains a storybook component library and gatsby site.
 
 ## Getting Started
 
 When you check out this repository, just run `yarn install` and it will install the node_modules.
 
-The repository has 3 workspaces - `components`, `packages`, and `sites`. Each package is contained in a child folder of these workspaces (i.e. `./components/comonent-library`). By convention we 
+The repository has 2 workspaces - `components`, and `sites`. Each package is contained in a child folder of these workspaces (i.e. `./components/comonent-library`). 
 
 ---
 
 ## Components
-
 ### Component Library
 
-Reusable React component library built with TypeScript + Storybook
+Reusable React component library built with TypeScript + Storybook, uses Bulma for styling.
 
 [View ReadMe](components/component-library)
 
@@ -32,31 +29,8 @@ Reusable React component library built with TypeScript + Storybook
 
 ## Sites
 
-### Tenant Portal
+### Personal Site
+Personal site made using React, Gatsby and Typescript.
 
-...
-
-### Landlord Portal
-
-...
-
-### Marketing Site
-
-...
-
-
----
-
-## Tips and Tools
-
-VS Code Extensions:
-- **Markdown All in One**
-`yzhang.markdown-all-in-one`
-  - Easily add/update table of contents. In VS Code, press Ctrl+Shift+P and start typing "table of contents" to quickly access commands
-- **Sass**
-`syler.sass-indented`
-- **Prettier** - Code formatter
-`esbenp.prettier-vscode`
-- ...add more!
 
 
