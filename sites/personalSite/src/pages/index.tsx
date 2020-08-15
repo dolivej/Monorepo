@@ -1,19 +1,25 @@
 import "@locnest/component-library/lib/styles/componentstyles.sass";
 import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+import './index.css'
 
 import { graphql } from "gatsby";
 import Typical from "react-typical";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import * as React from "react";
+import {useState, useEffect} from "react";
+import {timeTracker} from '../data/helperMethods';
+
 import {
   Pricing,
   PostPreview,
   Collection,
-  Footer,
-  Markdown,
   LogoShowcase,
+  Context
 } from "@locnest/component-library";
-import NavBar from "../components/Navar";
+
+import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import Timer from '../components/Timer'
 
 export const indexPageQuery = graphql`
   query IndexPageQuery {
@@ -62,216 +68,358 @@ const Template = (props: any) => {
   );
 };
 
-export default class IndexPage extends React.Component {
-  public render() {
+const IndexPage = () => {
+
+
+
+
     return (
-      <div>
-        <SEO title="About" lang="en" />
-        <NavBar />
-        <div style={{ width: "100%", height: "800px" }}>
-          <div
-            id="landing"
-            style={{
-              background: "url(" + Background + ") no-repeat center center",
-              backgroundSize: "cover",
-              height: "100%",
-              width: "100%",
-              overflow: "hidden",
-              textAlign: "center",
-              WebkitBackgroundSize: "cover",
-              MozBackgroundSize: "cover",
-              OBackgroundSize: "cover",
-            }}
-          >
-            <figure
-              className="image"
-              style={{
-                display: "inline-block",
-                paddingTop: "100px",
-                height: "256px",
-                width: "256px",
-              }}
-            >
-              <img
-                className="is-rounded"
-                src={Profile}
-                style={{ border: "solid 5px white" }}
-              />
-            </figure>
-            <div style={{ paddingTop: "200px" }}>
-              <div
-                className="card"
-                style={{
-                  width: "700px",
-                  margin: "0 auto",
-                  borderTop: "solid 10px #fad052",
-                  borderBottom: "solid 10px #fad052",
-                }}
-              >
-                <div className="card-content">
-                  <h1 className="title is-1">⚡ Hi, Im David. ⚡</h1>
-                  <h3 className="title is-4">
-                    {" "}
-                    <Typical
-                      steps={[
-                        "💻 Full-Stack Developer.",
-                        3000,
-                        "📚 Student.",
-                        3000,
-                        "🍪 Novice Baker. :)",
-                        6000,
-                        "💻 Full-Stack Developer.",
-                      ]}
-                      loop={1}
-                      wrapper="p"
+          <Layout>
+            <SEO title="About" lang="en" />
+            <Context.Consumer>
+            {({ logger, userFlow, setUserFlow }: any) => {
+     
+              const logButtonClick = (name: string, path : string) => {
+                setTimeout(function(){
+                  if(logger.loggerService){
+                    userFlow.push({name:'Clicked Button', properties: { buttonName: name, path : path, group : 'test' }})
+                    setUserFlow(userFlow)
+                    logger.loggerService.trackEvent({
+                      name : 'Clicked Button',
+                      properties: { buttonName: name, path : path, group : 'test' }
+                    })
+                   }
+                }, 4000);
+              }
+
+              const sectionView = (name: string, duration : number, loggerTemp : any) => {
+                if(loggerTemp.loggerService){
+                  userFlow.push({name:'Viewed ' + name, properties: { duration : duration, group : 'test' }})
+                  setUserFlow(userFlow)
+                  loggerTemp.loggerService.trackEvent({
+                    name : 'Viewed ' + name,
+                    properties: { duration : duration, group : 'test' }
+                  })
+                }
+              }
+              
+              const test = (loggerTemp : any) => {
+                let time = 0;
+                let landingTime = 0;
+                let skillsTime = 0;
+                let projectsTime = 0;
+                let analyticsTime = 0;
+
+                const incrementTimer = () => {
+                  time = time + 1;
+                  if(time > 3600){
+                    time = 0;
+                  }
+                  //console.log(time)
+                  landingTime = timeTracker(time, landingTime, 'landing', (value : any)=> { sectionView('landing', value, loggerTemp)})
+                  skillsTime = timeTracker(time, skillsTime, 'skills', (value : any)=> { sectionView('skills', value, loggerTemp)})
+                  projectsTime = timeTracker(time, projectsTime, 'projects', (value : any)=> { sectionView('projects', value, loggerTemp)})
+                  analyticsTime = timeTracker(time, analyticsTime, 'analytics', (value : any)=> { sectionView('analytics', value, loggerTemp)})
+                }
+                setInterval(incrementTimer, 1000);
+              }
+              
+            
+
+
+              return (
+                <div>  
+                {logger.loggerService && <Timer  runFunction={test} loggerTemp={logger}/>}
+                  <div style={{ width: "100%", height: "100vh", boxShadow: '10px 10px 23px -1px rgba(0,0,0,0.5)' }}>
+                <div
+                  id="landing"
+                  style={{
+                    background: "url(" + Background + ") no-repeat center center",
+                    backgroundSize: "cover",
+                    height: "100%",
+                    width: "100%",
+                    overflow: "hidden",
+                    textAlign: "center",
+                    WebkitBackgroundSize: "cover",
+                    MozBackgroundSize: "cover",
+                    OBackgroundSize: "cover",
+                  }}
+                >
+                  <figure
+                    className="image"
+                    style={{
+                      display: "inline-block",
+                      paddingTop: "9vh",
+                      height: "30vh",
+                      width: "30vh",
+
+                    }}
+                  >
+                    <img
+                      className="is-rounded"
+                      src={Profile}
+                      style={{ border: "solid 5px white" , boxShadow: '10px 10px 23px -1px rgba(0,0,0,0.5)'}}
+
                     />
-                  </h3>
+                  </figure>
+                  <div style={{ paddingTop: "20vh" }}>
+                    <div
+                      className="card"
+                      style={{
+                        width: "75vh",
+                        margin: "0 auto",
+                        borderTop: "solid 10px #fad052",
+                        borderBottom: "solid 10px #fad052",
+                        boxShadow: '10px 10px 23px -1px rgba(0,0,0,0.5)',
+                        borderRadius: '7px'
+                      }}
+                    >
+                      <div className="card-content" style={{ padding: "10px", textAlign: 'center'}}>
+                        <h1 className="mobile-title title">⚡ Hi, Im David. ⚡</h1>
+                        <h3 className="mobile-subtitle title">
+                          {" "}
+                          <Typical
+                            steps={[
+                              "💻 Full-Stack Developer.",
+                              3000,
+                              "📚 Student.",
+                              3000,
+                              "🍪 Novice Baker. :)",
+                              6000,
+                              "💻 React/Node.js Developer.",
+                            ]}
+                            loop={1}
+                            wrapper="p"
+                          />
+                        </h3>
+                      </div>
+
+                      <div style={{maxWidth:'500px', display: 'inline-block'}}>
+                        <div className='columns is-mobile' style={{padding: '20px'}}>
+                          <div className='column' >
+                        
+                              <ScrollLink
+                                activeClass="projects"
+                                to="projects"
+                                spy={true}
+                                smooth={true}
+                                offset={100}
+                                duration={1000}
+                            >     
+                              <button className='is-primary is-rounded button' onClick={() => {logButtonClick('landing-projects','/#projects')}}>My Projects</button>
+                            </ScrollLink>
+          
+                          </div>
+                          <div className='column'>
+                          <ScrollLink
+                                activeClass="skills"
+                                to="skills"
+                                spy={true}
+                                smooth={true}
+                                offset={100}
+                                duration={1000}
+                            >     
+                              <button className='is-primary is-rounded button is-outlined' onClick={() => {logButtonClick('landing-skills','/#skills')}}>My Skills</button>
+                            </ScrollLink>
+                          </div>
+                        </div>
+                      </div>
+                    
+                    </div>
+                  </div>
+
+                
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        <div
-          id="skills"
-          style={{
-            textAlign: "center",
-            paddingTop: "5em",
-            paddingBottom: "2em",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "1400px",
-              margin: "0 auto",
-              borderTop: "solid 1px #fad052",
-              borderBottom: "solid 1px #fad052",
-              padding: "40px",
-            }}
-          >
-            <h3 className="title is-2">🧍 About Me</h3>
-            <p>
-              Hi, I'm David. I am currently studying Systems Design Engineering
-              at the University of Waterloo. As part of my program I can
-              complete 6 internship placements to learn through doing, I have
-              already completed three in various roles such as Front-End
-              Architect, Full-Stack Developer and QA Software Developer and am
-              excited for the next three.
-              <br />
-              <br />
-              <strong>
-                I have citizenship in the USA/Canada and am interested in
-                4-month internships in the field of Full-Stack or Front-End
-                Development.
-              </strong>
-              <br />
-              <br />
-              If you feel my skills match your role or have an interesting
-              project, please feel free to contact me!
-            </p>
-            <Pricing {...mySkills} />
+                  <div
+                id="skills"
+                style={{
+                  textAlign: "center",
+                  marginTop: "5em",
+                  paddingBottom: "2em",
+                }}
+              >
+                <div
+                  style={{
+                    maxWidth: "1400px",
+                    margin: "0 auto",
+                    borderTop: "solid 1px #fad052",
+                    borderBottom: "solid 1px #fad052",
+                    padding: "10%",
+                  }}
+                >
+                  <h3 className="title is-2">🧍 About Me</h3>
+                  <p>
+                    Hi, I'm David. I am currently studying Systems Design Engineering
+                    at the University of Waterloo. As part of my program I can
+                    complete 6 internship placements to learn through doing, I have
+                    already completed three in various roles such as Front-End
+                    Architect, Full-Stack Developer and QA Software Developer and am
+                    excited for the next three.
+                    <br />
+                    <br />
+                    <strong>
+                      I have citizenship in the USA/Canada and am interested in
+                      4-month internships in the field of Full-Stack or Front-End
+                      Development.
+                    </strong>
+                  </p>
+                  <Pricing {...mySkills} />
 
-            <LogoShowcase {...myLogos} />
-          </div>
-        </div>
+                  <LogoShowcase {...myLogos} />
+ 
+                </div>
+              </div>
 
-        <div
-          style={{
-            background: "url(" + divider + ") no-repeat center center",
-            backgroundSize: "cover",
-            height: "800px",
-            width: "100%",
-            overflow: "hidden",
-            WebkitBackgroundSize: "cover",
-            MozBackgroundSize: "cover",
-            OBackgroundSize: "cover",
-            WebkitBoxShadow: "2px 0px 30px 13px rgba(81,81,81,0.55)",
-            boxShadow: "2px 0px 30px 13px rgba(81,81,81,0.55)",
-          }}
-        />
-        <div id="projects" style={{ textAlign: "center" }}>
-          <div
-            style={{
-              width: "100%",
-              height: "1700px",
-              marginTop: "70px",
-              paddingBottom: "70px",
-              marginBottom: "20px",
-              textAlign: "center",
-              padding: "30px",
-            }}
-          >
-            <h1 className="title is-2">📁 Projects</h1>
-            <div
-              style={{
-                height: "95%",
-                width: "100%",
-                display: "inline-block",
-                maxWidth: "1300px",
-              }}
-            >
-              <Collection
-                sizemap="'c c' 'a b' 'a b'"
-                minMobileHeight="520px"
-                data={[
-                  {
-                    data: {
-                      tags: tagsConst,
-                      image:
-                        "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                      brief: "Brief Description",
-                      title: "Project Name",
-                      about:
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                      links: [
-                        { text: "Read More", link: "link" },
-                        { text: "Github", link: "link" },
-                      ],
-                    },
-                    gridId: "a",
-                  },
-                  {
-                    data: {
-                      tags: tagsConst,
-                      image:
-                        "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                      brief: "Brief Description",
-                      title: "Project Name",
-                      about:
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                      links: [
-                        { text: "Read More", link: "link" },
-                        { text: "Github", link: "link" },
-                      ],
-                    },
-                    gridId: "b",
-                  },
-                  {
-                    data: {
-                      tags: tagsConst,
-                      image:
-                        "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                      brief: "Brief Description",
-                      title: "Project Name",
-                      about:
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                      links: [
-                        { text: "Read More", link: "link" },
-                        { text: "Github", link: "link" },
-                      ],
-                    },
-                    gridId: "c",
-                  },
-                ]}
-                spacing={"20px"}
-                template={Template}
-              />
-            </div>
-          </div>
-        </div>
+                  <div
+                style={{
+                  background: "url(" + divider + ") no-repeat center center",
+                  backgroundSize: "cover",
+                  height: "1500px",
+                  width: "100%",
+                  overflow: "hidden",
+                  WebkitBackgroundSize: "cover",
+                  MozBackgroundSize: "cover",
+                  OBackgroundSize: "cover",
+                  WebkitBoxShadow: "2px 0px 30px 13px rgba(81,81,81,0.55)",
+                  boxShadow: "2px 0px 30px 13px rgba(81,81,81,0.55)",
+                  marginTop: '5em',
+                }}
+              >
+                
+              <div id="projects" style={{ textAlign: "center" }}>
+                <div
+                  style={{
+                    width: "100%",
+                    height: "1500px",
+                    marginTop: "20px",
+                    paddingBottom: "70px",
+                    marginBottom: "20px",
+                    textAlign: "center",
+                    padding: "10%",
+                  }}
+                >
+                  <h1 className="title is-2" style={{backgroundColor: 'white', padding:"10px", maxWidth:'300px', margin: '0 auto', marginBottom: '20px', borderRadius: '7px'}}>📁 Projects</h1>
+                  <div
+                    style={{
+                      height: "95%",
+                      width: "100%",
+                      display: "inline-block",
+                      maxWidth: "1300px",
+                      backgroundColor: "lightgray",
+                      borderRadius: "10px"
+                    }}
+                  >
+                    <Collection
+                      sizemap="'a b' 'a b' 'c d' 'c d'"
+                      minMobileHeight="520px"
+                      data={[
+                        {
+                          data: {
+                            tags: tagsConst,
+                            image:
+                              "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                            brief: "Brief Description",
+                            title: "Project Name",
+                            about:
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
+                            links: [
+                              { text: "Read More", link: "link" },
+                              { text: "Github", link: "link" },
+                            ],
+                          },
+                          gridId: "a",
+                        },
+                        {
+                          data: {
+                            tags: tagsConst,
+                            image:
+                              "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                            brief: "Brief Description",
+                            title: "Project Name",
+                            about:
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
+                            links: [
+                              { text: "Read More", link: "link" },
+                              { text: "Github", link: "link" },
+                            ],
+                          },
+                          gridId: "b",
+                        },
+                        {
+                          data: {
+                            tags: tagsConst,
+                            image:
+                              "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                            brief: "Brief Description",
+                            title: "Project Name",
+                            about:
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
+                            links: [
+                              { text: "Read More", link: "link" },
+                              { text: "Github", link: "link" },
+                            ],
+                          },
+                          gridId: "c",
+                        },
+                        {
+                          data: {
+                            tags: tagsConst,
+                            image:
+                              "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                            brief: "Brief Description",
+                            title: "Project Name",
+                            about:
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
+                            links: [
+                              { text: "Read More", link: "link" },
+                              { text: "Github", link: "link" },
+                            ],
+                          },
+                          gridId: "d",
+                        },
+                      ]}
+                      spacing={"20px"}
+                      template={Template}
+                    />
+                  </div>
+                </div>
+              </div>
+                </div>
 
-        <Footer />
-      </div>
-    );
-  }
+                  <div
+                id="analytics"
+                style={{
+                  textAlign: "center",
+                  marginTop: "5em",
+                  paddingBottom: "2em",
+                }}
+              >
+                <div
+                  style={{
+                    maxWidth: "1400px",
+                    margin: "0 auto",
+                    borderTop: "solid 1px #fad052",
+                    borderBottom: "solid 1px #fad052",
+                    padding: "10%",
+                  }}
+                >
+                  <h1 className='title is-3'>Your Live User Flow: </h1>
+                {userFlow.map((event : any) => {
+                   return <div> {event.name} </div>
+                 })} 
+
+                 {console.log(userFlow)}
+                </div>
+              </div>
+                </div>
+              )
+            }} 
+          </Context.Consumer>
+          
+          </Layout>
+  );
 }
+
+export default IndexPage;

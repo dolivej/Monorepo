@@ -11,3 +11,12 @@
     color: #aaa;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .mobile-title {
+    font-size: 24px;
+  }
+  .mobile-subtitle {
+    font-size: 12px;
+  }
+}

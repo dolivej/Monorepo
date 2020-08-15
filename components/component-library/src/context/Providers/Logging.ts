@@ -47,36 +47,8 @@ export const getLoggerService = () => appInsights;
 export const createLoggerService = createAppInsights();
 export const loggingEnabled = withAITracking;
 
-const trackException = (logger: any, errorName: string) => {
-  if (logger) {
-    logger.trackException({
-      error: new Error(errorName),
-      severityLevel: SeverityLevel.Error,
-    });
-  }
-};
-
-const trackTrace = (logger: any, traceMessage: string) => {
-  if (logger) {
-    logger.trackException({
-      message: traceMessage,
-      severityLevel: SeverityLevel.Information,
-    });
-  }
-};
-
-const trackEvent = (logger: any, eventName: string) => {
-  if (logger) {
-    logger.trackException({ name: eventName });
-  }
-};
-
 export const logger = {
   initialized: false,
   loggerService: null,
-  methods: {
-    trackException: trackException,
-    trackTrace: trackTrace,
-    trackEvent: trackEvent,
-  },
+  severity: SeverityLevel,
 };

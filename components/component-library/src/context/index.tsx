@@ -12,10 +12,14 @@ export type ContextProps = {
 
 export type ContextState = {
   logger: any;
+  userFlow : any;
+  setUserFlow : any;
 };
 
 export const Context = createContext<ContextState>({
   logger: { ...logger },
+  userFlow : [],
+  setUserFlow : null,
 });
 
 export class ContextProviderBase extends Component<ContextProps, ContextState> {
@@ -25,6 +29,8 @@ export class ContextProviderBase extends Component<ContextProps, ContextState> {
     // Set default state
     this.state = {
       logger: { ...logger },
+      userFlow : [],
+      setUserFlow: (newFlow : any) => {this.setState({userFlow : newFlow})}
     };
   }
 
