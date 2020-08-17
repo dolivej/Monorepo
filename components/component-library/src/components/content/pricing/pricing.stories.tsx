@@ -16,6 +16,7 @@ const Example = () => {
             price: "",
             callToAction: "Contact Sales",
             callToActionLink: "www",
+            callToActionFunction: () => {},
             groups: [
               {
                 title: "Frameworks",
@@ -37,6 +38,7 @@ const Example = () => {
             price: "",
             callToAction: "Contact Sales",
             callToActionLink: "www",
+            callToActionFunction: () => {},
             groups: [
               {
                 title: "Frameworks",
@@ -52,6 +54,7 @@ const Example = () => {
             price: "",
             callToAction: "Contact Sales",
             callToActionLink: "www",
+            callToActionFunction: () => {},
             groups: [
               {
                 title: "Frameworks",

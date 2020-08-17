@@ -1,16 +1,41 @@
 .mobile-title {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 .mobile-subtitle {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
-@media only screen and (max-width: 600px) {
-    .mobile-title {
-        font-size: 2rem;
-    }
-    .mobile-subtitle {
-        font-size: 1rem;
-    }
+.landingText {
+  padding-top: 50px;
+}
+
+.mobileCenter {
+  max-width: 300px;
+}
+
+.mobileCenterButton {
+  max-width: 150px;
+}
+
+@media only screen and (max-width: 780px) {
+  .mobile-title {
+    font-size: 2rem;
+  }
+  .mobile-subtitle {
+    font-size: 1rem;
+  }
+
+  .landingText {
+    text-align: center;
+    padding-top: 0px;
+  }
+
+  .mobileCenter {
+    max-width: none;
+  }
+
+  .mobileCenterButton {
+    max-width: none;
+  }
 }

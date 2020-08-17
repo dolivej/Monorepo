@@ -116,7 +116,7 @@ export const Pricing = (props: PricingProps) => {
                   style={{
                     borderTop: "solid 2px #fad052",
                     borderBottom: "solid 2px #fad052",
-                    boxShadow: '0px 10px 16px -5px rgba(0,0,0,0.62)'
+                    boxShadow: "0px 10px 16px -5px rgba(0,0,0,0.62)",
                   }}
                 >
                   <div className="card-content" style={{ textAlign: "center" }}>
@@ -153,7 +153,11 @@ export const Pricing = (props: PricingProps) => {
 
                     <h4 className="title is-spaced is-5">{plan.price}</h4>
                     <a href={plan.callToActionLink}>
-                      <button className="button is-primary" type="button">
+                      <button
+                        className="button is-primary"
+                        type="button"
+                        onClick={plan.callToActionFunction}
+                      >
                         {plan.callToAction}
                       </button>
                     </a>

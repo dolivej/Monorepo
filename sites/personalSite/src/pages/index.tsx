@@ -1,25 +1,28 @@
 import "@locnest/component-library/lib/styles/componentstyles.sass";
 import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
-import './index.css'
+import "./index.css";
 
 import { graphql } from "gatsby";
 import Typical from "react-typical";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import * as React from "react";
-import {useState, useEffect} from "react";
-import {timeTracker} from '../data/helperMethods';
+import { useState, useEffect } from "react";
+import { timeTracker } from "../data/helperMethods";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import {
   Pricing,
   PostPreview,
   Collection,
   LogoShowcase,
-  Context
+  Context,
 } from "@locnest/component-library";
 
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
-import Timer from '../components/Timer'
+import Timer from "../components/Timer";
+import Loading from "../components/Loading";
 
 export const indexPageQuery = graphql`
   query IndexPageQuery {
@@ -69,72 +72,115 @@ const Template = (props: any) => {
 };
 
 const IndexPage = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {}, []);
 
-
-
-
-    return (
-          <Layout>
-            <SEO title="About" lang="en" />
-            <Context.Consumer>
-            {({ logger, userFlow, setUserFlow }: any) => {
-     
-              const logButtonClick = (name: string, path : string) => {
-                setTimeout(function(){
-                  if(logger.loggerService){
-                    userFlow.push({name:'Clicked Button', properties: { buttonName: name, path : path, group : 'test' }})
-                    setUserFlow(userFlow)
-                    logger.loggerService.trackEvent({
-                      name : 'Clicked Button',
-                      properties: { buttonName: name, path : path, group : 'test' }
-                    })
-                   }
-                }, 4000);
+  return (
+    <Layout>
+      <SEO title="About" lang="en" />
+      <Context.Consumer>
+        {({ logger, userFlow, setUserFlow }: any) => {
+          const logButtonClick = (name: string, path: string) => {
+            setTimeout(function () {
+              if (logger.loggerService) {
+                userFlow.push({
+                  name: "Clicked Button",
+                  properties: { buttonName: name, path: path, group: "test" },
+                });
+                setUserFlow(userFlow);
+                logger.loggerService.trackEvent({
+                  name: "Clicked Button",
+                  properties: { buttonName: name, path: path, group: "test" },
+                });
               }
+            }, 4000);
+          };
 
-              const sectionView = (name: string, duration : number, loggerTemp : any) => {
-                if(loggerTemp.loggerService){
-                  userFlow.push({name:'Viewed ' + name, properties: { duration : duration, group : 'test' }})
-                  setUserFlow(userFlow)
-                  loggerTemp.loggerService.trackEvent({
-                    name : 'Viewed ' + name,
-                    properties: { duration : duration, group : 'test' }
-                  })
+          const sectionView = (
+            name: string,
+            duration: number,
+            loggerTemp: any
+          ) => {
+            if (loggerTemp.loggerService) {
+              userFlow.push({
+                name: "Viewed " + name,
+                properties: { duration: duration, group: "test" },
+              });
+              setUserFlow(userFlow);
+              loggerTemp.loggerService.trackEvent({
+                name: "Viewed " + name,
+                properties: { duration: duration, group: "test" },
+              });
+            }
+          };
+
+          const timerStart = (loggerTemp: any) => {
+            let time = 0;
+            let landingTime = 0;
+            let skillsTime = 0;
+            let projectsTime = 0;
+            let analyticsTime = 0;
+
+            const incrementTimer = () => {
+              time = time + 1;
+              if (time > 3600) {
+                time = 0;
+              }
+              //console.log(time)
+              landingTime = timeTracker(
+                time,
+                landingTime,
+                "landing",
+                (value: any) => {
+                  sectionView("landing", value, loggerTemp);
                 }
-              }
-              
-              const test = (loggerTemp : any) => {
-                let time = 0;
-                let landingTime = 0;
-                let skillsTime = 0;
-                let projectsTime = 0;
-                let analyticsTime = 0;
-
-                const incrementTimer = () => {
-                  time = time + 1;
-                  if(time > 3600){
-                    time = 0;
-                  }
-                  //console.log(time)
-                  landingTime = timeTracker(time, landingTime, 'landing', (value : any)=> { sectionView('landing', value, loggerTemp)})
-                  skillsTime = timeTracker(time, skillsTime, 'skills', (value : any)=> { sectionView('skills', value, loggerTemp)})
-                  projectsTime = timeTracker(time, projectsTime, 'projects', (value : any)=> { sectionView('projects', value, loggerTemp)})
-                  analyticsTime = timeTracker(time, analyticsTime, 'analytics', (value : any)=> { sectionView('analytics', value, loggerTemp)})
+              );
+              skillsTime = timeTracker(
+                time,
+                skillsTime,
+                "skills",
+                (value: any) => {
+                  sectionView("skills", value, loggerTemp);
                 }
-                setInterval(incrementTimer, 1000);
-              }
-              
-            
+              );
+              projectsTime = timeTracker(
+                time,
+                projectsTime,
+                "projects",
+                (value: any) => {
+                  sectionView("projects", value, loggerTemp);
+                }
+              );
+              analyticsTime = timeTracker(
+                time,
+                analyticsTime,
+                "analytics",
+                (value: any) => {
+                  sectionView("analytics", value, loggerTemp);
+                }
+              );
+            };
+            setInterval(incrementTimer, 1000);
+          };
 
+          return (
+            <div>
+              {logger.loggerService && (
+                <Timer runFunction={timerStart} loggerTemp={logger} />
+              )}
 
-              return (
-                <div>  
-                {logger.loggerService && <Timer  runFunction={test} loggerTemp={logger}/>}
-                  <div style={{ width: "100%", height: "100vh", boxShadow: '10px 10px 23px -1px rgba(0,0,0,0.5)' }}>
+              {/* <div
+                style={{
+                  width: "100%",
+                  height: "100vh",
+                  boxShadow: "10px 10px 23px -1px rgba(0,0,0,0.5)",
+                }}
+              >
                 <div
                   id="landing"
                   style={{
-                    background: "url(" + Background + ") no-repeat center center",
+                    background:
+                      "url(" + Background + ") no-repeat center center",
                     backgroundSize: "cover",
                     height: "100%",
                     width: "100%",
@@ -146,36 +192,44 @@ const IndexPage = () => {
                   }}
                 >
                   <figure
+                    id="profile"
                     className="image"
                     style={{
                       display: "inline-block",
-                      paddingTop: "9vh",
+                      paddingTop: "10vh",
                       height: "30vh",
                       width: "30vh",
-
                     }}
                   >
                     <img
                       className="is-rounded"
                       src={Profile}
-                      style={{ border: "solid 5px white" , boxShadow: '10px 10px 23px -1px rgba(0,0,0,0.5)'}}
-
+                      style={{
+                        border: "solid 5px white",
+                        boxShadow: "10px 10px 23px -1px rgba(0,0,0,0.5)",
+                      }}
                     />
                   </figure>
-                  <div style={{ paddingTop: "20vh" }}>
+                  <div style={{ paddingTop: "21vh" }}>
                     <div
+                      id="banner"
                       className="card"
                       style={{
                         width: "75vh",
                         margin: "0 auto",
                         borderTop: "solid 10px #fad052",
                         borderBottom: "solid 10px #fad052",
-                        boxShadow: '10px 10px 23px -1px rgba(0,0,0,0.5)',
-                        borderRadius: '7px'
+                        boxShadow: "10px 10px 23px -1px rgba(0,0,0,0.5)",
+                        borderRadius: "7px",
                       }}
                     >
-                      <div className="card-content" style={{ padding: "10px", textAlign: 'center'}}>
-                        <h1 className="mobile-title title">⚡ Hi, Im David. ⚡</h1>
+                      <div
+                        className="card-content"
+                        style={{ padding: "10px", textAlign: "center" }}
+                      >
+                        <h1 className="mobile-title title">
+                          ⚡ Hi, Im David. ⚡
+                        </h1>
                         <h3 className="mobile-subtitle title">
                           {" "}
                           <Typical
@@ -194,45 +248,198 @@ const IndexPage = () => {
                         </h3>
                       </div>
 
-                      <div style={{maxWidth:'500px', display: 'inline-block'}}>
-                        <div className='columns is-mobile' style={{padding: '20px'}}>
-                          <div className='column' >
-                        
-                              <ScrollLink
-                                activeClass="projects"
-                                to="projects"
-                                spy={true}
-                                smooth={true}
-                                offset={100}
-                                duration={1000}
-                            >     
-                              <button className='is-primary is-rounded button' onClick={() => {logButtonClick('landing-projects','/#projects')}}>My Projects</button>
+                      <div
+                        style={{ maxWidth: "500px", display: "inline-block" }}
+                      >
+                        <div
+                          className="columns is-mobile"
+                          style={{ padding: "20px" }}
+                        >
+                          <div className="column">
+                            <ScrollLink
+                              activeClass="projects"
+                              to="projects"
+                              spy={true}
+                              smooth={true}
+                              offset={100}
+                              duration={1000}
+                            >
+                              <button
+                                className="is-primary is-rounded button"
+                                onClick={() => {
+                                  logButtonClick(
+                                    "landing-projects",
+                                    "/#projects"
+                                  );
+                                }}
+                              >
+                                My Projects
+                              </button>
                             </ScrollLink>
-          
                           </div>
-                          <div className='column'>
-                          <ScrollLink
-                                activeClass="skills"
-                                to="skills"
-                                spy={true}
-                                smooth={true}
-                                offset={100}
-                                duration={1000}
-                            >     
-                              <button className='is-primary is-rounded button is-outlined' onClick={() => {logButtonClick('landing-skills','/#skills')}}>My Skills</button>
+                          <div className="column">
+                            <ScrollLink
+                              activeClass="skills"
+                              to="skills"
+                              spy={true}
+                              smooth={true}
+                              offset={100}
+                              duration={1000}
+                            >
+                              <button
+                                className="is-primary is-rounded button is-outlined"
+                                onClick={() => {
+                                  logButtonClick("landing-skills", "/#skills");
+                                }}
+                              >
+                                My Skills
+                              </button>
                             </ScrollLink>
                           </div>
                         </div>
                       </div>
-                    
                     </div>
                   </div>
-
-                
                 </div>
+              </div> */}
+
+              <div id="landing">
+                <section
+                  className="hero is-large is-primary"
+                  style={{
+                    height: "90vh",
+                    width: "100vw",
+                  }}
+                >
+                  <div className="hero-body">
+                    <div className="container" style={{ padding: "20px" }}>
+                      <div
+                        className="columns"
+                        style={{
+                          backgroundColor: "white",
+                          marginRight: "10px",
+                          paddingTop: "20px",
+                          paddingBottom: "20px",
+                          maxHeight: "80vh",
+                        }}
+                      >
+                        <div
+                          className="column is-5 mobileCenter"
+                          style={{
+                            textAlign: "center",
+                          }}
+                        >
+                          <img
+                            src={Profile}
+                            className=""
+                            style={{
+                              border: "solid 1px white",
+                              boxShadow: "2px 4px 23px -1px rgba(0,0,0,0.2)",
+                              maxWidth: "250px",
+                              maxHeight: "450px",
+                            }}
+                          />
+                        </div>
+                        <div className="column">
+                          <div
+                            className="landingText"
+                            style={{
+                              height: "300px",
+                            }}
+                          >
+                            <h1
+                              className="title is-1"
+                              style={{ color: "black" }}
+                            >
+                              Hi im David,
+                            </h1>
+                            <br />
+                            <h2
+                              className="subtitle is-3"
+                              style={{ color: "black", marginTop: "-20px" }}
+                            >
+                              React/Node.js Full-Stack Developer. 💻
+                            </h2>
+
+                            <div className="columns is-mobile">
+                              <div className="column mobileCenterButton">
+                                <ScrollLink
+                                  activeClass="projects"
+                                  to="projects"
+                                  spy={true}
+                                  smooth={true}
+                                  offset={100}
+                                  duration={1000}
+                                >
+                                  <button
+                                    className="is-primary is-rounded button"
+                                    onClick={() => {
+                                      logButtonClick(
+                                        "landing-projects",
+                                        "/#projects"
+                                      );
+                                    }}
+                                  >
+                                    My Projects
+                                  </button>
+                                </ScrollLink>
+                              </div>
+
+                              <div className="column mobileCenterButton">
+                                <ScrollLink
+                                  activeClass="analytics"
+                                  to="analytics"
+                                  spy={true}
+                                  smooth={true}
+                                  offset={100}
+                                  duration={1000}
+                                >
+                                  <button
+                                    className="is-primary is-rounded button is-outlined"
+                                    onClick={() => {
+                                      logButtonClick(
+                                        "landing-analytics",
+                                        "/#analytics"
+                                      );
+                                    }}
+                                  >
+                                    Site Analytics
+                                  </button>
+                                </ScrollLink>
+                              </div>
+
+                              <div className="column mobileCenterButton">
+                                <ScrollLink
+                                  activeClass="skills"
+                                  to="skills"
+                                  spy={true}
+                                  smooth={true}
+                                  offset={100}
+                                  duration={1000}
+                                >
+                                  <button
+                                    className="is-primary is-rounded button is-outlined"
+                                    onClick={() => {
+                                      logButtonClick(
+                                        "landing-skills",
+                                        "/#skills"
+                                      );
+                                    }}
+                                  >
+                                    My Skills
+                                  </button>
+                                </ScrollLink>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </div>
 
-                  <div
+              <div
                 id="skills"
                 style={{
                   textAlign: "center",
@@ -246,37 +453,44 @@ const IndexPage = () => {
                     margin: "0 auto",
                     borderTop: "solid 1px #fad052",
                     borderBottom: "solid 1px #fad052",
-                    padding: "10%",
+                    padding: "5vw",
                   }}
                 >
-                  <h3 className="title is-2">🧍 About Me</h3>
-                  <p>
-                    Hi, I'm David. I am currently studying Systems Design Engineering
-                    at the University of Waterloo. As part of my program I can
-                    complete 6 internship placements to learn through doing, I have
-                    already completed three in various roles such as Front-End
-                    Architect, Full-Stack Developer and QA Software Developer and am
-                    excited for the next three.
-                    <br />
-                    <br />
-                    <strong>
-                      I have citizenship in the USA/Canada and am interested in
-                      4-month internships in the field of Full-Stack or Front-End
-                      Development.
-                    </strong>
-                  </p>
-                  <Pricing {...mySkills} />
+                  <div id="aboutText">
+                    <h3 className="title is-2">🧍 About Me</h3>
+                    <p>
+                      Hi, I'm David. I am currently studying Systems Design
+                      Engineering at the University of Waterloo. As part of my
+                      program I can complete 6 internship placements to learn
+                      through doing, I have already completed three in various
+                      roles such as Front-End Architect, Full-Stack Developer
+                      and QA Software Developer and am excited for the next
+                      three.
+                      <br />
+                      <br />
+                      <strong>
+                        I have citizenship in the USA/Canada and am interested
+                        in 4-month internships in the field of Full-Stack or
+                        Front-End Development.
+                      </strong>
+                    </p>
+                  </div>
 
-                  <LogoShowcase {...myLogos} />
- 
+                  <div id="aboutSkills">
+                    <Pricing {...mySkills} />
+                  </div>
+
+                  <div id="aboutJobs">
+                    <LogoShowcase {...myLogos} />
+                  </div>
                 </div>
               </div>
 
-                  <div
+              <div
                 style={{
                   background: "url(" + divider + ") no-repeat center center",
                   backgroundSize: "cover",
-                  height: "1500px",
+                  height: "1700px",
                   width: "100%",
                   overflow: "hidden",
                   WebkitBackgroundSize: "cover",
@@ -284,116 +498,127 @@ const IndexPage = () => {
                   OBackgroundSize: "cover",
                   WebkitBoxShadow: "2px 0px 30px 13px rgba(81,81,81,0.55)",
                   boxShadow: "2px 0px 30px 13px rgba(81,81,81,0.55)",
-                  marginTop: '5em',
+                  marginTop: "5em",
                 }}
               >
-                
-              <div id="projects" style={{ textAlign: "center" }}>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "1500px",
-                    marginTop: "20px",
-                    paddingBottom: "70px",
-                    marginBottom: "20px",
-                    textAlign: "center",
-                    padding: "10%",
-                  }}
-                >
-                  <h1 className="title is-2" style={{backgroundColor: 'white', padding:"10px", maxWidth:'300px', margin: '0 auto', marginBottom: '20px', borderRadius: '7px'}}>📁 Projects</h1>
+                <div id="projects" style={{ textAlign: "center" }}>
                   <div
                     style={{
-                      height: "95%",
                       width: "100%",
-                      display: "inline-block",
-                      maxWidth: "1300px",
-                      backgroundColor: "lightgray",
-                      borderRadius: "10px"
+                      height: "1700px",
+                      marginTop: "20px",
+                      paddingBottom: "70px",
+                      marginBottom: "20px",
+                      textAlign: "center",
+                      padding: "10%",
                     }}
                   >
-                    <Collection
-                      sizemap="'a b' 'a b' 'c d' 'c d'"
-                      minMobileHeight="520px"
-                      data={[
-                        {
-                          data: {
-                            tags: tagsConst,
-                            image:
-                              "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                            brief: "Brief Description",
-                            title: "Project Name",
-                            about:
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                            links: [
-                              { text: "Read More", link: "link" },
-                              { text: "Github", link: "link" },
-                            ],
+                    <h1
+                      className="title is-2"
+                      style={{
+                        backgroundColor: "white",
+                        padding: "10px",
+                        maxWidth: "300px",
+                        margin: "0 auto",
+                        marginBottom: "20px",
+                        borderRadius: "7px",
+                      }}
+                    >
+                      📁 Projects
+                    </h1>
+                    <div
+                      style={{
+                        height: "95%",
+                        width: "100%",
+                        display: "inline-block",
+                        maxWidth: "1175px",
+                        backgroundColor: "lightgray",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <Collection
+                        sizemap="'a b' 'a b' 'c d' 'c d'"
+                        minMobileHeight="520px"
+                        data={[
+                          {
+                            data: {
+                              tags: tagsConst,
+                              image:
+                                "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                              brief: "Brief Description",
+                              title: "Project Name",
+                              about:
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
+                              links: [
+                                { text: "Read More", link: "link" },
+                                { text: "Github", link: "link" },
+                              ],
+                            },
+                            gridId: "a",
                           },
-                          gridId: "a",
-                        },
-                        {
-                          data: {
-                            tags: tagsConst,
-                            image:
-                              "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                            brief: "Brief Description",
-                            title: "Project Name",
-                            about:
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                            links: [
-                              { text: "Read More", link: "link" },
-                              { text: "Github", link: "link" },
-                            ],
+                          {
+                            data: {
+                              tags: tagsConst,
+                              image:
+                                "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                              brief: "Brief Description",
+                              title: "Project Name",
+                              about:
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
+                              links: [
+                                { text: "Read More", link: "link" },
+                                { text: "Github", link: "link" },
+                              ],
+                            },
+                            gridId: "b",
                           },
-                          gridId: "b",
-                        },
-                        {
-                          data: {
-                            tags: tagsConst,
-                            image:
-                              "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                            brief: "Brief Description",
-                            title: "Project Name",
-                            about:
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                            links: [
-                              { text: "Read More", link: "link" },
-                              { text: "Github", link: "link" },
-                            ],
+                          {
+                            data: {
+                              tags: tagsConst,
+                              image:
+                                "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                              brief: "Brief Description",
+                              title: "Project Name",
+                              about:
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
+                              links: [
+                                { text: "Read More", link: "link" },
+                                { text: "Github", link: "link" },
+                              ],
+                            },
+                            gridId: "c",
                           },
-                          gridId: "c",
-                        },
-                        {
-                          data: {
-                            tags: tagsConst,
-                            image:
-                              "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                            brief: "Brief Description",
-                            title: "Project Name",
-                            about:
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                            links: [
-                              { text: "Read More", link: "link" },
-                              { text: "Github", link: "link" },
-                            ],
+                          {
+                            data: {
+                              tags: tagsConst,
+                              image:
+                                "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                              brief: "Brief Description",
+                              title: "Project Name",
+                              about:
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
+                              links: [
+                                { text: "Read More", link: "link" },
+                                { text: "Github", link: "link" },
+                              ],
+                            },
+                            gridId: "d",
                           },
-                          gridId: "d",
-                        },
-                      ]}
-                      spacing={"20px"}
-                      template={Template}
-                    />
+                        ]}
+                        spacing={"20px"}
+                        template={Template}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-                </div>
 
-                  <div
+              <div
                 id="analytics"
                 style={{
                   textAlign: "center",
                   marginTop: "5em",
-                  paddingBottom: "2em",
+                  minHeight: "100vh",
                 }}
               >
                 <div
@@ -405,21 +630,20 @@ const IndexPage = () => {
                     padding: "10%",
                   }}
                 >
-                  <h1 className='title is-3'>Your Live User Flow: </h1>
-                {userFlow.map((event : any) => {
-                   return <div> {event.name} </div>
-                 })} 
+                  <h1 className="title is-3">Your Live User Flow: </h1>
+                  {userFlow.map((event: any) => {
+                    return <div> {event.name} </div>;
+                  })}
 
-                 {console.log(userFlow)}
+                  {console.log(userFlow)}
                 </div>
               </div>
-                </div>
-              )
-            }} 
-          </Context.Consumer>
-          
-          </Layout>
+            </div>
+          );
+        }}
+      </Context.Consumer>
+    </Layout>
   );
-}
+};
 
 export default IndexPage;

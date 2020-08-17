@@ -1,30 +1,36 @@
-import React, {ReactNode} from "react";
+import React, { ReactNode } from "react";
 
 export interface overlayProps {
-  active? : boolean;
+  active?: boolean;
   children: ReactNode;
 }
 
 export const Overlay = (props: overlayProps) => {
-
   return (
-    <div style={{
-        position: 'fixed',
-        display: props.active ? 'block' : 'none',
-        width: '100%',
-        height: '100%',
+    <div
+      style={{
+        position: "fixed",
+        display: props.active ? "block" : "none",
+        width: "100%",
+        height: "100%",
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0,0,0,0.2)',
-        zIndex: 10,
-        textAlign: 'center',
-    }}>
-        <div style={{display: 'inline-block', marginTop:'30vh', backgroundColor:'white', padding:'20px', borderRadius:'10px', boxShadow: '10px 10px 26px -10px rgba(0,0,0,0.76)'}}>
-            {props.children}
-        </div>
-
+        backgroundColor: "rgba(0,0,0,0.2)",
+        zIndex: 20,
+        textAlign: "center",
+      }}
+    >
+      <div
+        style={{
+          display: "inline-block",
+          backgroundColor: "white",
+          boxShadow: "10px 10px 26px -10px rgba(0,0,0,0.76)",
+        }}
+      >
+        {props.children}
+      </div>
     </div>
   );
 };
