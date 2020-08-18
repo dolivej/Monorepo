@@ -12,7 +12,7 @@ export const mySkills = {
         "I excell at developing reusable, functional and beautiful components/sites.",
       price: "",
       callToAction: "See Examples",
-      callToActionLink: "www",
+      callToActionLink: "#projects",
       groups: [
         {
           title: "Frameworks",
@@ -33,7 +33,7 @@ export const mySkills = {
         "I have experience developing asyncronous API's with Express.",
       price: "",
       callToAction: "See Examples",
-      callToActionLink: "www",
+      callToActionLink: "#projects",
       groups: [
         {
           title: "Frameworks",
@@ -49,7 +49,7 @@ export const mySkills = {
         "I am passionate about all things analytics and also topics like SEO.",
       price: "",
       callToAction: "See Examples",
-      callToActionLink: "www",
+      callToActionLink: "#analytics",
       groups: [
         {
           title: "Frameworks",
@@ -74,5 +74,5 @@ export const myLogos = {
     "https://www.imaginecommunications.com/",
     "https://uwaterloo.ca/",
   ],
-  title: "Places I've Worked At",
+  title: "Companies I've Developed For",
 };

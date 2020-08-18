@@ -10,6 +10,8 @@ export interface PopupProps {
   messageList: Array<String>;
   value: string;
   roundAmount: string;
+  avatarProps?: any;
+  name?: any;
 }
 
 export const Popup = (props: PopupProps) => {
@@ -25,6 +27,10 @@ export const Popup = (props: PopupProps) => {
       "url(https://petmd.com/sites/default/files/CANS_dogsmiling_379727605.jpg)",
     statusIsHidden: false,
   };
+
+  if (props.avatarProps) {
+    avatarProps = props.avatarProps;
+  }
 
   let display = {
     display: props.display,
@@ -55,14 +61,18 @@ export const Popup = (props: PopupProps) => {
               statusIsHidden={avatarProps.statusIsHidden}
             />
             <div className="popup-subheader-text">
-              <h4 className="popup-text">Max</h4>
+              <h4 className="popup-text">{props.name}</h4>
             </div>
           </div>
         </div>
       </div>
       <div>
         <div className="popup-message-container customScrollBar">
-          <Bubbles messageList={props.messageList} />
+          <Bubbles
+            messageList={props.messageList}
+            avatarProps={avatarProps}
+            name={props.name}
+          />
         </div>
         <div className="popup-sender-container popup">
           <form

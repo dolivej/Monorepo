@@ -3,22 +3,27 @@ import Avatar from "../Avatar/index";
 
 export interface BubbleProps {
   messageList: Array<String>;
+  avatarProps?: any;
+  name?: string;
 }
 
-let avatarProps = {
-  size: "27px",
-  statusSize: "11px",
-  avatarRoundAmount: "25%",
-  statusRoundAmount: "50%",
-  statusColor: "rgb(0, 189, 165)",
-  avatarBorderSize: "2px",
-  statusBorderSize: "2px",
-  image:
-    "url(https://petmd.com/sites/default/files/CANS_dogsmiling_379727605.jpg)",
-  statusIsHidden: true,
-};
-
 export const chatBubbles = (props: BubbleProps) => {
+  let avatarProps = {
+    size: "27px",
+    statusSize: "11px",
+    avatarRoundAmount: "25%",
+    statusRoundAmount: "50%",
+    statusColor: "rgb(0, 189, 165)",
+    avatarBorderSize: "2px",
+    statusBorderSize: "2px",
+    image:
+      "url(https://petmd.com/sites/default/files/CANS_dogsmiling_379727605.jpg)",
+    statusIsHidden: true,
+  };
+
+  if (props.avatarProps) {
+    avatarProps = props.avatarProps;
+  }
   let style = {
     marginTop: "10px",
   };
@@ -28,7 +33,11 @@ export const chatBubbles = (props: BubbleProps) => {
   try {
     const scrollTo = document.getElementById("scrollTo");
     useEffect(() => {
-      scrollTo?.scrollIntoView();
+      scrollTo?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
     });
   } catch (error) {
     console.log(error);
@@ -41,6 +50,7 @@ export const chatBubbles = (props: BubbleProps) => {
         if (message[0] === "L") {
           return (
             <div className="bubbles-message-container-left-full">
+              {console.log(props.messageList[i])}
               {(i === 0 || props.messageList[i - 1].split(":")[0] !== "L") && (
                 <div className="bubbles-message-title">
                   <div className="bubbles-avatar-container">
@@ -58,7 +68,7 @@ export const chatBubbles = (props: BubbleProps) => {
                   </div>
                   <div className="bubbles-name-container chatBubblesText">
                     {" "}
-                    Max{" "}
+                    {props.name}{" "}
                   </div>
                 </div>
               )}

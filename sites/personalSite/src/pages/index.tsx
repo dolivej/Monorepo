@@ -4,7 +4,8 @@ import "./index.css";
 
 import { graphql } from "gatsby";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
-import  React from "react";
+import ScrollOut from "scroll-out";
+import React from "react";
 import { useState, useEffect } from "react";
 import { timeTracker, getMax } from "../data/helperMethods";
 
@@ -14,11 +15,14 @@ import {
   Collection,
   LogoShowcase,
   Context,
+  FAQ,
+  ExpandableTag,
 } from "@locnest/component-library";
 
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import Timer from "../components/Timer";
+import Chatbot from "../components/Chatbot";
 
 export const indexPageQuery = graphql`
   query IndexPageQuery {
@@ -33,6 +37,13 @@ export const indexPageQuery = graphql`
 import { mySkills, myLogos } from "../data/index";
 import Profile from "../data/pictures/profile.png";
 import divider from "../data/pictures/divider.svg";
+import landingImg from "../data/pictures/background1.svg";
+import loadtime from "../data/pictures/loadtime.png";
+import dependancyCalls from "../data/pictures/dependancyCalls.png";
+import exceptions from "../data/pictures/exceptions.png";
+import userFlowImg from "../data/pictures/UserFlow.png";
+import userAmount from "../data/pictures/UserAmount.png";
+import eventsAmount from "../data/pictures/eventsAmount.png";
 
 let tagsConst = [
   {
@@ -68,7 +79,12 @@ const Template = (props: any) => {
 
 const IndexPage = () => {
   const [loading, setLoading] = useState(true);
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    ScrollOut({
+      once: true,
+    });
+  }, []);
 
   return (
     <Layout>
@@ -170,10 +186,15 @@ const IndexPage = () => {
                   style={{
                     height: "90vh",
                     width: "100vw",
+                    background: "url(" + landingImg + ") ",
                   }}
                 >
                   <div className="hero-body">
-                    <div className="container" style={{ padding: "20px" }}>
+                    <div
+                      className="container"
+                      data-scroll
+                      style={{ padding: "20px" }}
+                    >
                       <div
                         className="columns mobileContainer"
                         style={{
@@ -191,12 +212,10 @@ const IndexPage = () => {
                         >
                           <img
                             src={Profile}
-                            className=""
+                            className="imgMobile"
                             style={{
                               border: "solid 1px white",
                               boxShadow: "2px 4px 23px -1px rgba(0,0,0,0.2)",
-                              maxWidth: "250px",
-                              maxHeight: "450px",
                             }}
                           />
                         </div>
@@ -222,74 +241,60 @@ const IndexPage = () => {
                             </h2>
 
                             <div className="columns">
-                              <div className="column is-3">
-                                {typeof window !== 'undefined' && ScrollLink && <ScrollLink
-                                  activeClass="projects"
-                                  to="projects"
-                                  spy={true}
-                                  smooth={true}
-                                  offset={100}
-                                  duration={1000}
-                                >
-                                  <button
-                                    className="is-primary is-rounded button"
-                                    onClick={() => {
-                                      logButtonClick(
-                                        "landing-projects",
-                                        "/#projects"
-                                      );
-                                    }}
+                              <div
+                                className="column is-2"
+                                style={{ minWidth: "135px" }}
+                              >
+                                {typeof window !== "undefined" && ScrollLink && (
+                                  <ScrollLink
+                                    activeClass="projects"
+                                    to="projects"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={100}
+                                    duration={1000}
                                   >
-                                    My Projects
-                                  </button>
-                                </ScrollLink>}
+                                    <button
+                                      className="is-primary is-rounded button"
+                                      onClick={() => {
+                                        logButtonClick(
+                                          "landing-projects",
+                                          "/#projects"
+                                        );
+                                      }}
+                                    >
+                                      My Work
+                                    </button>
+                                  </ScrollLink>
+                                )}
                               </div>
 
-                              <div className="column is-3">
-                              {typeof window !== 'undefined' && ScrollLink && <ScrollLink
-                                  activeClass="analytics"
-                                  to="analytics"
-                                  spy={true}
-                                  smooth={true}
-                                  offset={100}
-                                  duration={1000}
-                                >
-                                  <button
-                                    className="is-primary is-rounded button is-outlined"
-                                    onClick={() => {
-                                      logButtonClick(
-                                        "landing-analytics",
-                                        "/#analytics"
-                                      );
-                                    }}
+                              <div
+                                className="column is-2"
+                                style={{ minWidth: "135px" }}
+                              >
+                                {typeof window !== "undefined" && ScrollLink && (
+                                  <ScrollLink
+                                    activeClass="skills"
+                                    to="skills"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={100}
+                                    duration={1000}
                                   >
-                                    Site Analytics
-                                  </button>
-                                </ScrollLink>
-        }
-                              </div>
-
-                              <div className="column is-3">
-                              {typeof window !== 'undefined' && ScrollLink && <ScrollLink
-                                  activeClass="skills"
-                                  to="skills"
-                                  spy={true}
-                                  smooth={true}
-                                  offset={100}
-                                  duration={1000}
-                                >
-                                  <button
-                                    className="is-primary is-rounded button is-outlined"
-                                    onClick={() => {
-                                      logButtonClick(
-                                        "landing-skills",
-                                        "/#skills"
-                                      );
-                                    }}
-                                  >
-                                    My Skills
-                                  </button>
-                                  </ScrollLink> }
+                                    <button
+                                      className="is-primary is-rounded button is-outlined"
+                                      onClick={() => {
+                                        logButtonClick(
+                                          "landing-skills",
+                                          "/#skills"
+                                        );
+                                      }}
+                                    >
+                                      My Skills
+                                    </button>
+                                  </ScrollLink>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -317,7 +322,7 @@ const IndexPage = () => {
                     padding: "5vw",
                   }}
                 >
-                  <div id="aboutText" style={{maxWidth: '1100px'}}>
+                  <div id="aboutText" data-scroll>
                     <h3 className="title is-2">🧍 About Me</h3>
                     <p>
                       Hi, I'm David. I am currently studying Systems Design
@@ -337,11 +342,15 @@ const IndexPage = () => {
                     </p>
                   </div>
 
-                  <div id="aboutSkills">
+                  <div
+                    id="aboutSkills"
+                    data-scroll
+                    style={{ marginTop: "50px" }}
+                  >
                     <Pricing {...mySkills} />
                   </div>
 
-                  <div id="aboutJobs">
+                  <div id="aboutJobs" data-scroll style={{ marginTop: "50px" }}>
                     <LogoShowcase {...myLogos} />
                   </div>
                 </div>
@@ -375,6 +384,7 @@ const IndexPage = () => {
                     }}
                   >
                     <h1
+                      data-scroll
                       className="title is-2"
                       style={{
                         backgroundColor: "white",
@@ -385,9 +395,10 @@ const IndexPage = () => {
                         borderRadius: "7px",
                       }}
                     >
-                      📁 Projects
+                      📁 My Work
                     </h1>
                     <div
+                      data-scroll
                       style={{
                         height: "95%",
                         width: "100%",
@@ -405,9 +416,9 @@ const IndexPage = () => {
                             data: {
                               tags: tagsConst,
                               image:
-                                "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                              brief: "Brief Description",
-                              title: "Project Name",
+                                "https://i.ibb.co/WFNZqj0/screely-1597790880239.png",
+                              brief: "Optimizing customer service.",
+                              title: "Chatbot",
                               about:
                                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
                               links: [
@@ -437,7 +448,7 @@ const IndexPage = () => {
                             data: {
                               tags: tagsConst,
                               image:
-                                "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
+                                "https://zippypixels.com/wp-content/uploads/2015/09/01-Free-perspective-website-mockup-824x542.jpg",
                               brief: "Brief Description",
                               title: "Project Name",
                               about:
@@ -453,9 +464,9 @@ const IndexPage = () => {
                             data: {
                               tags: tagsConst,
                               image:
-                                "https://mk0zofoqaluvgdskgvsb.kinstacdn.com/photos/750-X-400-2x.jpg",
-                              brief: "Brief Description",
-                              title: "Project Name",
+                                "https://i.ibb.co/3ymCTtR/screely-1597791281981.png",
+                              brief: "Unlocking insights.",
+                              title: "Analytics",
                               about:
                                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
                               links: [
@@ -487,202 +498,258 @@ const IndexPage = () => {
                     maxWidth: "1400px",
                     margin: "0 auto",
                     borderTop: "solid 1px #fad052",
-                    borderBottom: "solid 1px #fad052",
                     padding: "10%",
-                    textAlign: 'center'
+                    textAlign: "center",
                   }}
+                  data-scroll
                 >
-
-                <div style={{maxWidth: '1100px', marginBottom: '100px'}}>
-                    <h3 className="title is-2" style={{color:'#fad052'}}>📊 Site Analytics: Powered by Azure App Insights.</h3>
+                  <div style={{ maxWidth: "1100px", marginBottom: "100px" }}>
+                    <h3 className="title is-2" style={{ color: "#fad052" }}>
+                      📊 Site Analytics
+                    </h3>
                     <p>
-                      After working on the analytics team at IBM I came to realize the buisness value that analytics provide. 
-                      Being able to track user flows, site performance and API requests allows for you to guide and quantify the growth of your website and buisness.
+                      After working on the analytics team at IBM I came to
+                      realize the buisness value that analytics provide. Being
+                      able to track user flows, site performance and API
+                      requests allows for you to guide and quantify the growth
+                      of your website and buisness.
                       <br />
                       <br />
-                        While I have worked with many analytics tools like Amplitude and New Relic, in my own site I used Microsofts App Insights to grow my portfolio and also because
-                        it allows me to track both  <strong> Site Health Analytics </strong> and  <strong> User Experience Analytics.</strong>
+                      While I have worked with many analytics tools like
+                      Amplitude and New Relic, in my own site I used Microsofts
+                      App Insights to grow my portfolio and also because it
+                      allows me to track both{" "}
+                      <strong> Site Health Analytics </strong> and{" "}
+                      <strong> User Experience Analytics.</strong>
                     </p>
                   </div>
 
+                  <FAQ
+                    picture="https://cdn2.iconfinder.com/data/icons/ux-process-filled-outline/64/user_testing-usability_testing-test-hand-click-interface-ux-128.png"
+                    title="User Flow Analytics"
+                    data-scroll
+                  >
+                    <p>
+                      Track metrics like{" "}
+                      <strong>
+                        {" "}
+                        # of monthly users, # visits per page, # user events
+                        (like button clicks), user flows (like checkout or
+                        signup flows) .
+                      </strong>
+                      <br />
+                      <br />
+                      Metrics like these can help you identify where design
+                      changes need to be made to increase conversions, visits or
+                      time spent on sections.
+                    </p>
 
-                  <div>
-                  <h3 className="title is-3" style={{color:'#fad052'}}>User Experience Analytics </h3>
-                  <p>
-                      Track metrics like <strong> # of monthly users, # visits per page, # user events (like button clicks), user flows (like checkout or signup flows) .</strong>
-                      <br/>
-                      <br/>
-                      Metrics like these can help you identify where design changes need to be made to increase conversions, visits or time spent on sections.
-                  </p>
-
-
-                  <h3 className="title is-4" style={{paddingTop:'70px', color:'#fad052'}}> Site User Metrics: </h3>
-                  <p> Site user metrics to date. </p>
-                  <section className="info-tiles">
-                    <div className="tile is-ancestor has-text-centered">
+                    <h3
+                      className="title is-4"
+                      style={{ paddingTop: "70px", color: "#fad052" }}
+                    >
+                      {" "}
+                      Stats for August:{" "}
+                    </h3>
+                    <section className="info-tiles">
+                      <div className="tile is-ancestor has-text-centered">
                         <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">2</p>
-                                <p className="subtitle">All Time Visits</p>
-                            </article>
+                          <article className="tile is-child box">
+                            <figure className="is-square">
+                              <img src={userFlowImg} />
+                            </figure>
+                          </article>
                         </div>
                         <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">2</p>
-                                <p className="subtitle">Visits This Month</p>
-                            </article>
+                          <article className="tile is-child box">
+                            <figure className="is-square">
+                              <img src={userAmount} />
+                            </figure>
+                          </article>
                         </div>
+                        <div className="tile is-parent">
+                          <article className="tile is-child box">
+                            <figure className="is-square">
+                              <img src={eventsAmount} />
+                            </figure>
+                          </article>
+                        </div>
+                      </div>
+                    </section>
+                  </FAQ>
+                  <FAQ
+                    picture="https://simpleicon.com/wp-content/uploads/Code-Optimization-2-256x256.png"
+                    title="Site Health Analytics"
+                    data-scroll
+                  >
+                    <div>
+                      <p>
+                        Track metrics like{" "}
+                        <strong>
+                          {" "}
+                          page/component load times, # requests, # of failed
+                          requests, exceptions and errors .
+                        </strong>
+                        <br />
+                        <br />
+                        Metrics like these can help you identify where code
+                        needs to be optimized or you can use it to set up alerts
+                        in case of 3rd part outages or errors.
+                      </p>
+
+                      <h3
+                        className="title is-4"
+                        style={{ paddingTop: "70px", color: "#fad052" }}
+                      >
+                        {" "}
+                        Stats for August:{" "}
+                      </h3>
+                      <section className="info-tiles">
+                        <div className="tile is-ancestor has-text-centered">
+                          <div className="tile is-parent">
+                            <article className="tile is-child box">
+                              <figure className="is-square">
+                                <img src={loadtime} />
+                              </figure>
+                            </article>
+                          </div>
+                          <div className="tile is-parent">
+                            <article className="tile is-child box">
+                              <figure className="is-square">
+                                <img src={dependancyCalls} />
+                              </figure>
+                            </article>
+                          </div>
+                          <div className="tile is-parent">
+                            <article className="tile is-child box">
+                              <figure className="is-square">
+                                <img src={exceptions} />
+                              </figure>
+                            </article>
+                          </div>
+                        </div>
+                      </section>
                     </div>
-                </section>
-
-                <section className="info-tiles">
-                    <div className="tile is-ancestor has-text-centered">
-                        <div className="tile is-parent">
+                  </FAQ>
+                  <FAQ
+                    picture="https://www.shareicon.net/data/256x256/2016/02/28/726264_arrows_512x512.png"
+                    title="Example: Your Live User Flow"
+                    data-scroll
+                  >
+                    <p>
+                      <strong>
+                        If you do not have adblock, below you should see some
+                        live tracking of your journey on my site!
+                      </strong>
+                    </p>
+                    <br />
+                    <div>
+                      <section className="info-tiles">
+                        <div className="tile is-ancestor has-text-centered">
+                          <div className="tile is-parent">
                             <article className="tile is-child box">
-                                <p className="title">"About"</p>
-                                <p className="subtitle">Most Viewed Page : 43 Views</p>
+                              <p className="title">
+                                "{getMax(userFlow, "views").name}"
+                              </p>
+                              <p className="subtitle">
+                                Most Viewed Section :{" "}
+                                {getMax(userFlow, "views").value} Views
+                              </p>
                             </article>
-                        </div>
-                        <div className="tile is-parent">
+                          </div>
+                          <div className="tile is-parent">
                             <article className="tile is-child box">
-                                <p className="title">"Analytics"</p>
-                                <p className="subtitle">Most Viewed Section : 36 Views</p>
+                              <p className="title">
+                                "{getMax(userFlow, "time").name}"
+                              </p>
+                              <p className="subtitle">
+                                Longest Viewed Section (average):{" "}
+                                {getMax(userFlow, "time").value} Seconds
+                              </p>
                             </article>
+                          </div>
                         </div>
-                        <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">"Analytics"</p>
-                                <p className="subtitle">Longest Viewed Section (average) : 16 Seconds</p>
-                            </article>
-                        </div>
-                    </div>
-                </section>
+                      </section>
 
+                      <div style={{ paddingTop: "30px" }}>
+                        <div
+                          className="customScrollBar"
+                          style={{
+                            maxWidth: "1000px",
+                            height: "150px",
+                            borderTop: "solid 2px black",
+                            borderBottom: "solid 2px black",
+                            boxShadow:
+                              "inset -1px 2px 5px 0px rgba(0,0,0,0.75)",
 
-                <h3 className="title is-4" style={{paddingTop:'100px', color:'#fad052'}}> Your Current User Metrics and User Flow: </h3>
-                <p> Check out your live user flow and average metrics. </p>
-                <section className="info-tiles">
-                    <div className="tile is-ancestor has-text-centered">
-                        <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">"{getMax(userFlow, 'views').name}"</p>
-                                <p className="subtitle">Most Viewed Section : {getMax(userFlow, 'views').value} Views</p>
-                            </article>
-                        </div>
-                        <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">"{getMax(userFlow, 'time').name}"</p>
-                                <p className="subtitle">Longest Viewed Section (average): {getMax(userFlow, 'time').value} Seconds</p>
-                            </article>
-                        </div>
-                    </div>
-                </section>
+                            overflowX: "scroll",
+                            overflowY: "hidden",
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: (userFlow.length + 1) * 200 + "px",
+                              paddingTop: "60",
+                            }}
+                          >
+                            {userFlow.map((event: any, index: number) => {
+                              let icon;
+                              let detail;
+                              let color;
 
-                  <div style={{paddingTop:'30px'}}>
-                      <div className='customScrollBar' style={{
-                        maxWidth: '1000px', 
-                        height : '150px', 
-                        borderTop: 'solid 2px black', 
-                        borderBottom: 'solid 2px black', 
-                        boxShadow: 'inset -1px 2px 5px 0px rgba(0,0,0,0.75)',
+                              if (event.name === "Clicked Nav") {
+                                icon = "fa-route";
+                                detail = '"' + event.properties.path + '"';
+                                color = "yellow";
+                              } else if (event.name === "Clicked Button") {
+                                icon = "fa-hand-point-down";
+                                detail =
+                                  '"' + event.properties.buttonName + '"';
+                                color = "orange";
+                              } else if (event.name.includes("Viewed")) {
+                                icon = "fa-eye";
+                                detail = event.properties.duration + " seconds";
+                                color = "lightblue";
+                              }
 
-                        overflowX: 'scroll',
-                        overflowY: 'hidden'
-                      }}>
-                        <div style={{width: (userFlow.length + 1) * 200 + 'px', paddingTop: '60'}}>
-
-                        {userFlow.map((event: any, index: number) => {
-                          let icon;
-                          let detail;
-
-                          if(event.name === 'Clicked Nav'){
-                            icon = 'fa-route'
-                            detail = '"' + event.properties.path + '"'
-                          }else if(event.name === 'Clicked Button'){
-                            icon = 'fa-hand-point-down'
-                            detail = '"' + event.properties.buttonName + '"'
-                          }else if(event.name.includes('Viewed')){
-                            icon = 'fa-eye'
-                            detail = event.properties.duration + ' seconds'
-                          }
-
-
-
-                          return (<div style={{
-                            position: 'relative',
-                            display: 'inline-block',  
-                            paddingTop: '40px'
-                            }}> 
-
-                            <div className='tags are-medium has-addons' style={{padding:'10px'}}> 
-                              <span className="tag is-primary"> <i className={'fa ' + icon}></i> </span>
-                              <span className="tag"> {event.name + ' : ' + detail} </span>
-
-                              {index !== userFlow.length && <i className='fa fa-arrow-right' style={{padding: '5px'}} />}
-                            </div>
-                          </div>);
-                        })}
+                              return (
+                                <div
+                                  style={{
+                                    position: "relative",
+                                    display: "inline-block",
+                                    paddingTop: "40px",
+                                  }}
+                                >
+                                  <ExpandableTag
+                                    picture={icon}
+                                    title={event.name}
+                                    backgroundColor={color}
+                                  >
+                                    {detail}
+                                  </ExpandableTag>
+                                  {index !== userFlow.length && (
+                                    <i
+                                      className="fa fa-arrow-right"
+                                      style={{ padding: "5px" }}
+                                    />
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  
-
-                  <div>
-                  <h3 className="title is-3" style={{color:'#fad052', paddingTop: '200px'}}>Site Health Analytics </h3>
-                  <p>
-                      Track metrics like <strong> page/component load times, # requests, # of failed requests, exceptions and errors .</strong>
-                      <br/>
-                      <br/>
-                      Metrics like these can help you identify where code needs to be optimized or you can use it to set up alerts in case of 3rd part outages or errors.
-                  </p>
-
-
-                  <h3 className="title is-4" style={{paddingTop:'70px', color:'#fad052'}}> Site Health Metrics: </h3>
-                  <p> Site health metrics to date. </p>
-                  <section className="info-tiles">
-                    <div className="tile is-ancestor has-text-centered">
-                        <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">1.87 seconds</p>
-                                <p className="subtitle">Home Page Load Time</p>
-                            </article>
-                        </div>
-                        <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">~ seconds</p>
-                                <p className="subtitle">Experience Page Load Time</p>
-                            </article>
-                        </div>
-                        <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">6.5 seconds</p>
-                                <p className="subtitle">Worst Page Load Time</p>
-                            </article>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="info-tiles">
-                    <div className="tile is-ancestor has-text-centered">
-                        <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">"Send Grid"</p>
-                                <p className="subtitle">Most API Calls</p>
-                            </article>
-                        </div>
-                        <div className="tile is-parent">
-                            <article className="tile is-child box">
-                                <p className="title">"16"</p>
-                                <p className="subtitle">Average Dependancy Calls</p>
-                            </article>
-                        </div>
-                    </div>
-                </section>
+                  </FAQ>
                 </div>
-                  
-                  
-                </div>
+              </div>
+
+              <div style={{ position: "sticky", bottom: "0" }}>
+                <Chatbot
+                  messageList={[]}
+                  popupRound={"4px 4px 0px 0px"}
+                  iconRound={"25%"}
+                />
               </div>
             </div>
           );

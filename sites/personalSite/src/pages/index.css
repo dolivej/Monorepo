@@ -15,8 +15,29 @@
 }
 
 .mobileContainer {
-
 }
+
+[data-scroll] {
+  transition: all 2s;
+}
+[data-scroll="in"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+[data-scroll="out"] {
+  opacity: 0;
+  transform: translateX(-200px);
+}
+
+.imgMobile {
+  max-width: 250px;
+  max-height: 450px;
+}
+
+.maxWidthMobile {
+  max-width: 135px;
+}
+
 @media only screen and (max-width: 780px) {
   .mobile-title {
     font-size: 2rem;
@@ -32,10 +53,18 @@
 
   .mobileCenter {
     max-width: none;
-    display: none;
   }
 
   .mobileContainer {
-    height : 78vh
+    height: 78vh;
+  }
+
+  .imgMobile {
+    max-width: 150px;
+    max-height: 450px;
+  }
+
+  .maxWidthMobile {
+    max-width: none;
   }
 }
