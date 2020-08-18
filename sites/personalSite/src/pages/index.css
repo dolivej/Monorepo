@@ -14,10 +14,9 @@
   max-width: 300px;
 }
 
-.mobileCenterButton {
-  max-width: 150px;
-}
+.mobileContainer {
 
+}
 @media only screen and (max-width: 780px) {
   .mobile-title {
     font-size: 2rem;
@@ -33,9 +32,10 @@
 
   .mobileCenter {
     max-width: none;
+    display: none;
   }
 
-  .mobileCenterButton {
-    max-width: none;
+  .mobileContainer {
+    height : 78vh
   }
 }

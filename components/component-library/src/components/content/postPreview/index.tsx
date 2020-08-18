@@ -21,8 +21,10 @@ export const PostPreview = (props: PostPreviewProps) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   useEffect(() => {
+    if(typeof window !== 'undefined'){
     setWidth(ref.current!["offsetWidth"]);
     setHeight(ref.current!["offsetHeight"]);
+    }
   });
 
   const sizeCondition =

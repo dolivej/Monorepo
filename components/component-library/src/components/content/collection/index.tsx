@@ -15,7 +15,7 @@ export interface CollectionProps {
 }
 
 export const useWindowSize = () => {
-  if (window) {
+  if (typeof window !== 'undefined') {
     const [size, setSize] = useState([0, 0]);
     useLayoutEffect(() => {
       function updateSize() {

@@ -34,7 +34,7 @@ export default function Navbar() {
             <NavGroup align="start">
               <NavHover title="About">
                 <NavLink>
-                  <ScrollLink
+                {typeof window !== 'undefined' && ScrollLink && <ScrollLink
                       activeClass="skills"
                       to="skills"
                       spy={true}
@@ -42,10 +42,10 @@ export default function Navbar() {
                       offset={100}
                       duration={1000}
                   > <h2 className="" style={{color:'#4a4a4a' }} onClick={() => {logNavClick('/#skills')}}>Skills</h2>
-                </ScrollLink>
+                </ScrollLink> }
                 </NavLink>
                 <NavLink>
-                <ScrollLink
+                {typeof window !== 'undefined' && ScrollLink && <ScrollLink
                     activeClass="projects"
                     to="projects"
                     spy={true}
@@ -53,10 +53,10 @@ export default function Navbar() {
                     offset={100}
                     duration={1000}
                 > <h2 className="" style={{color:'#4a4a4a'}} onClick={() => {logNavClick('/#projects')}}>Projects</h2>
-                </ScrollLink>
+                </ScrollLink> }
                 </NavLink>
                 <NavLink>
-                <ScrollLink
+                {typeof window !== 'undefined' && ScrollLink && <ScrollLink
                     activeClass="analytics"
                     to="analytics"
                     spy={true}
@@ -64,7 +64,7 @@ export default function Navbar() {
                     offset={100}
                     duration={1000}
                 > <h2 className="" style={{color:'#4a4a4a'}} onClick={() => {logNavClick('/#analytics')}}>Analytics</h2>
-                </ScrollLink>
+                </ScrollLink> }
                 </NavLink>
               </NavHover>
               <NavHover title="Experience">

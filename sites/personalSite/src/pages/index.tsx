@@ -3,13 +3,10 @@ import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
 import "./index.css";
 
 import { graphql } from "gatsby";
-import Typical from "react-typical";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
-import * as React from "react";
+import  React from "react";
 import { useState, useEffect } from "react";
-import { timeTracker } from "../data/helperMethods";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { timeTracker, getMax } from "../data/helperMethods";
 
 import {
   Pricing,
@@ -22,7 +19,6 @@ import {
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import Timer from "../components/Timer";
-import Loading from "../components/Loading";
 
 export const indexPageQuery = graphql`
   query IndexPageQuery {
@@ -35,7 +31,6 @@ export const indexPageQuery = graphql`
 `;
 
 import { mySkills, myLogos } from "../data/index";
-import Background from "../data/pictures/background1.jpg";
 import Profile from "../data/pictures/profile.png";
 import divider from "../data/pictures/divider.svg";
 
@@ -169,143 +164,9 @@ const IndexPage = () => {
                 <Timer runFunction={timerStart} loggerTemp={logger} />
               )}
 
-              {/* <div
-                style={{
-                  width: "100%",
-                  height: "100vh",
-                  boxShadow: "10px 10px 23px -1px rgba(0,0,0,0.5)",
-                }}
-              >
-                <div
-                  id="landing"
-                  style={{
-                    background:
-                      "url(" + Background + ") no-repeat center center",
-                    backgroundSize: "cover",
-                    height: "100%",
-                    width: "100%",
-                    overflow: "hidden",
-                    textAlign: "center",
-                    WebkitBackgroundSize: "cover",
-                    MozBackgroundSize: "cover",
-                    OBackgroundSize: "cover",
-                  }}
-                >
-                  <figure
-                    id="profile"
-                    className="image"
-                    style={{
-                      display: "inline-block",
-                      paddingTop: "10vh",
-                      height: "30vh",
-                      width: "30vh",
-                    }}
-                  >
-                    <img
-                      className="is-rounded"
-                      src={Profile}
-                      style={{
-                        border: "solid 5px white",
-                        boxShadow: "10px 10px 23px -1px rgba(0,0,0,0.5)",
-                      }}
-                    />
-                  </figure>
-                  <div style={{ paddingTop: "21vh" }}>
-                    <div
-                      id="banner"
-                      className="card"
-                      style={{
-                        width: "75vh",
-                        margin: "0 auto",
-                        borderTop: "solid 10px #fad052",
-                        borderBottom: "solid 10px #fad052",
-                        boxShadow: "10px 10px 23px -1px rgba(0,0,0,0.5)",
-                        borderRadius: "7px",
-                      }}
-                    >
-                      <div
-                        className="card-content"
-                        style={{ padding: "10px", textAlign: "center" }}
-                      >
-                        <h1 className="mobile-title title">
-                          ⚡ Hi, Im David. ⚡
-                        </h1>
-                        <h3 className="mobile-subtitle title">
-                          {" "}
-                          <Typical
-                            steps={[
-                              "💻 Full-Stack Developer.",
-                              3000,
-                              "📚 Student.",
-                              3000,
-                              "🍪 Novice Baker. :)",
-                              6000,
-                              "💻 React/Node.js Developer.",
-                            ]}
-                            loop={1}
-                            wrapper="p"
-                          />
-                        </h3>
-                      </div>
-
-                      <div
-                        style={{ maxWidth: "500px", display: "inline-block" }}
-                      >
-                        <div
-                          className="columns is-mobile"
-                          style={{ padding: "20px" }}
-                        >
-                          <div className="column">
-                            <ScrollLink
-                              activeClass="projects"
-                              to="projects"
-                              spy={true}
-                              smooth={true}
-                              offset={100}
-                              duration={1000}
-                            >
-                              <button
-                                className="is-primary is-rounded button"
-                                onClick={() => {
-                                  logButtonClick(
-                                    "landing-projects",
-                                    "/#projects"
-                                  );
-                                }}
-                              >
-                                My Projects
-                              </button>
-                            </ScrollLink>
-                          </div>
-                          <div className="column">
-                            <ScrollLink
-                              activeClass="skills"
-                              to="skills"
-                              spy={true}
-                              smooth={true}
-                              offset={100}
-                              duration={1000}
-                            >
-                              <button
-                                className="is-primary is-rounded button is-outlined"
-                                onClick={() => {
-                                  logButtonClick("landing-skills", "/#skills");
-                                }}
-                              >
-                                My Skills
-                              </button>
-                            </ScrollLink>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-
               <div id="landing">
                 <section
-                  className="hero is-large is-primary"
+                  className="hero is-medium is-primary"
                   style={{
                     height: "90vh",
                     width: "100vw",
@@ -314,13 +175,12 @@ const IndexPage = () => {
                   <div className="hero-body">
                     <div className="container" style={{ padding: "20px" }}>
                       <div
-                        className="columns"
+                        className="columns mobileContainer"
                         style={{
                           backgroundColor: "white",
                           marginRight: "10px",
                           paddingTop: "20px",
                           paddingBottom: "20px",
-                          maxHeight: "80vh",
                         }}
                       >
                         <div
@@ -361,9 +221,9 @@ const IndexPage = () => {
                               React/Node.js Full-Stack Developer. 💻
                             </h2>
 
-                            <div className="columns is-mobile">
-                              <div className="column mobileCenterButton">
-                                <ScrollLink
+                            <div className="columns">
+                              <div className="column is-3">
+                                {typeof window !== 'undefined' && ScrollLink && <ScrollLink
                                   activeClass="projects"
                                   to="projects"
                                   spy={true}
@@ -382,11 +242,11 @@ const IndexPage = () => {
                                   >
                                     My Projects
                                   </button>
-                                </ScrollLink>
+                                </ScrollLink>}
                               </div>
 
-                              <div className="column mobileCenterButton">
-                                <ScrollLink
+                              <div className="column is-3">
+                              {typeof window !== 'undefined' && ScrollLink && <ScrollLink
                                   activeClass="analytics"
                                   to="analytics"
                                   spy={true}
@@ -406,10 +266,11 @@ const IndexPage = () => {
                                     Site Analytics
                                   </button>
                                 </ScrollLink>
+        }
                               </div>
 
-                              <div className="column mobileCenterButton">
-                                <ScrollLink
+                              <div className="column is-3">
+                              {typeof window !== 'undefined' && ScrollLink && <ScrollLink
                                   activeClass="skills"
                                   to="skills"
                                   spy={true}
@@ -428,7 +289,7 @@ const IndexPage = () => {
                                   >
                                     My Skills
                                   </button>
-                                </ScrollLink>
+                                  </ScrollLink> }
                               </div>
                             </div>
                           </div>
@@ -456,7 +317,7 @@ const IndexPage = () => {
                     padding: "5vw",
                   }}
                 >
-                  <div id="aboutText">
+                  <div id="aboutText" style={{maxWidth: '1100px'}}>
                     <h3 className="title is-2">🧍 About Me</h3>
                     <p>
                       Hi, I'm David. I am currently studying Systems Design
@@ -628,14 +489,199 @@ const IndexPage = () => {
                     borderTop: "solid 1px #fad052",
                     borderBottom: "solid 1px #fad052",
                     padding: "10%",
+                    textAlign: 'center'
                   }}
                 >
-                  <h1 className="title is-3">Your Live User Flow: </h1>
-                  {userFlow.map((event: any) => {
-                    return <div> {event.name} </div>;
-                  })}
 
-                  {console.log(userFlow)}
+                <div style={{maxWidth: '1100px', marginBottom: '100px'}}>
+                    <h3 className="title is-2" style={{color:'#fad052'}}>📊 Site Analytics: Powered by Azure App Insights.</h3>
+                    <p>
+                      After working on the analytics team at IBM I came to realize the buisness value that analytics provide. 
+                      Being able to track user flows, site performance and API requests allows for you to guide and quantify the growth of your website and buisness.
+                      <br />
+                      <br />
+                        While I have worked with many analytics tools like Amplitude and New Relic, in my own site I used Microsofts App Insights to grow my portfolio and also because
+                        it allows me to track both  <strong> Site Health Analytics </strong> and  <strong> User Experience Analytics.</strong>
+                    </p>
+                  </div>
+
+
+                  <div>
+                  <h3 className="title is-3" style={{color:'#fad052'}}>User Experience Analytics </h3>
+                  <p>
+                      Track metrics like <strong> # of monthly users, # visits per page, # user events (like button clicks), user flows (like checkout or signup flows) .</strong>
+                      <br/>
+                      <br/>
+                      Metrics like these can help you identify where design changes need to be made to increase conversions, visits or time spent on sections.
+                  </p>
+
+
+                  <h3 className="title is-4" style={{paddingTop:'70px', color:'#fad052'}}> Site User Metrics: </h3>
+                  <p> Site user metrics to date. </p>
+                  <section className="info-tiles">
+                    <div className="tile is-ancestor has-text-centered">
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">2</p>
+                                <p className="subtitle">All Time Visits</p>
+                            </article>
+                        </div>
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">2</p>
+                                <p className="subtitle">Visits This Month</p>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="info-tiles">
+                    <div className="tile is-ancestor has-text-centered">
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">"About"</p>
+                                <p className="subtitle">Most Viewed Page : 43 Views</p>
+                            </article>
+                        </div>
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">"Analytics"</p>
+                                <p className="subtitle">Most Viewed Section : 36 Views</p>
+                            </article>
+                        </div>
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">"Analytics"</p>
+                                <p className="subtitle">Longest Viewed Section (average) : 16 Seconds</p>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+
+                <h3 className="title is-4" style={{paddingTop:'100px', color:'#fad052'}}> Your Current User Metrics and User Flow: </h3>
+                <p> Check out your live user flow and average metrics. </p>
+                <section className="info-tiles">
+                    <div className="tile is-ancestor has-text-centered">
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">"{getMax(userFlow, 'views').name}"</p>
+                                <p className="subtitle">Most Viewed Section : {getMax(userFlow, 'views').value} Views</p>
+                            </article>
+                        </div>
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">"{getMax(userFlow, 'time').name}"</p>
+                                <p className="subtitle">Longest Viewed Section (average): {getMax(userFlow, 'time').value} Seconds</p>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                  <div style={{paddingTop:'30px'}}>
+                      <div className='customScrollBar' style={{
+                        maxWidth: '1000px', 
+                        height : '150px', 
+                        borderTop: 'solid 2px black', 
+                        borderBottom: 'solid 2px black', 
+                        boxShadow: 'inset -1px 2px 5px 0px rgba(0,0,0,0.75)',
+
+                        overflowX: 'scroll',
+                        overflowY: 'hidden'
+                      }}>
+                        <div style={{width: (userFlow.length + 1) * 200 + 'px', paddingTop: '60'}}>
+
+                        {userFlow.map((event: any, index: number) => {
+                          let icon;
+                          let detail;
+
+                          if(event.name === 'Clicked Nav'){
+                            icon = 'fa-route'
+                            detail = '"' + event.properties.path + '"'
+                          }else if(event.name === 'Clicked Button'){
+                            icon = 'fa-hand-point-down'
+                            detail = '"' + event.properties.buttonName + '"'
+                          }else if(event.name.includes('Viewed')){
+                            icon = 'fa-eye'
+                            detail = event.properties.duration + ' seconds'
+                          }
+
+
+
+                          return (<div style={{
+                            position: 'relative',
+                            display: 'inline-block',  
+                            paddingTop: '40px'
+                            }}> 
+
+                            <div className='tags are-medium has-addons' style={{padding:'10px'}}> 
+                              <span className="tag is-primary"> <i className={'fa ' + icon}></i> </span>
+                              <span className="tag"> {event.name + ' : ' + detail} </span>
+
+                              {index !== userFlow.length && <i className='fa fa-arrow-right' style={{padding: '5px'}} />}
+                            </div>
+                          </div>);
+                        })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                  <div>
+                  <h3 className="title is-3" style={{color:'#fad052', paddingTop: '200px'}}>Site Health Analytics </h3>
+                  <p>
+                      Track metrics like <strong> page/component load times, # requests, # of failed requests, exceptions and errors .</strong>
+                      <br/>
+                      <br/>
+                      Metrics like these can help you identify where code needs to be optimized or you can use it to set up alerts in case of 3rd part outages or errors.
+                  </p>
+
+
+                  <h3 className="title is-4" style={{paddingTop:'70px', color:'#fad052'}}> Site Health Metrics: </h3>
+                  <p> Site health metrics to date. </p>
+                  <section className="info-tiles">
+                    <div className="tile is-ancestor has-text-centered">
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">1.87 seconds</p>
+                                <p className="subtitle">Home Page Load Time</p>
+                            </article>
+                        </div>
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">~ seconds</p>
+                                <p className="subtitle">Experience Page Load Time</p>
+                            </article>
+                        </div>
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">6.5 seconds</p>
+                                <p className="subtitle">Worst Page Load Time</p>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="info-tiles">
+                    <div className="tile is-ancestor has-text-centered">
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">"Send Grid"</p>
+                                <p className="subtitle">Most API Calls</p>
+                            </article>
+                        </div>
+                        <div className="tile is-parent">
+                            <article className="tile is-child box">
+                                <p className="title">"16"</p>
+                                <p className="subtitle">Average Dependancy Calls</p>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+                </div>
+                  
+                  
                 </div>
               </div>
             </div>
