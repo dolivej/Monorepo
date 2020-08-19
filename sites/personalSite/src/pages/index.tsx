@@ -230,16 +230,15 @@ const IndexPage = () => {
                               className="title is-1"
                               style={{ color: "black" }}
                             >
-                              Hi im David,
+                              Hi, im David.
                             </h1>
                             <br />
                             <h2
                               className="subtitle is-3"
                               style={{ color: "black", marginTop: "-20px" }}
                             >
-                              React/Node.js Full-Stack Developer. 💻
+                              Data driven development. 🧍 ➡ 📊 ➡ 👨‍💻
                             </h2>
-
                             <div className="columns">
                               <div
                                 className="column is-2"
@@ -336,8 +335,8 @@ const IndexPage = () => {
                       <br />
                       <strong>
                         I have citizenship in the USA/Canada and am interested
-                        in 4-month internships in the field of Full-Stack or
-                        Front-End Development.
+                        in 4-month internships in the field of Product/Analytics
+                        or Full-Stack/Front-End Development.
                       </strong>
                     </p>
                   </div>

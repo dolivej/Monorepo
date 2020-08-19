@@ -26,6 +26,17 @@ export const Contact = (props: contactProps) => {
               <div className="field">
                 <div className="control">
                   <input
+                    name="name"
+                    className="input"
+                    type="text"
+                    placeholder="Name"
+                    ref={register({ required: true })}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <div className="control">
+                  <input
                     name="email"
                     className="input"
                     type="email"

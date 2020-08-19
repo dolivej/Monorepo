@@ -15,7 +15,12 @@ storiesOf("Navigation/Navbar", module)
       <Nav>
         <NavGroup align="end">
           <NavGroup align="start">
-            <NavHover title="About">
+            <NavHover
+              title="About"
+              toFunc={() => {
+                return <div>hi</div>;
+              }}
+            >
               <NavLink>
                 {" "}
                 <h2 className="">Skills</h2>
@@ -27,7 +32,12 @@ storiesOf("Navigation/Navbar", module)
                 <h2 className="">Analytics</h2>
               </NavLink>
             </NavHover>
-            <NavHover title="Experience">
+            <NavHover
+              title="Experience"
+              toFunc={() => {
+                return <div>hi</div>;
+              }}
+            >
               <NavLink>
                 <h2 className="">Work History</h2>
               </NavLink>

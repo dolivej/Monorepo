@@ -24,13 +24,13 @@ export const Footer = (props: FooterProps) => {
             <a className="level-item" href="/">
               About
             </a>
-            <a className="level-item" href="/Experience">
+            <a className="level-item" href="/experience">
               Experience
             </a>
-            <a className="level-item" href="/Blog">
+            <a className="level-item" href="/blog">
               Blog
             </a>
-            <a className="level-item" href="#contact">
+            <a className="level-item" href="/contact">
               Contact
             </a>
           </div>
@@ -57,16 +57,6 @@ export const Footer = (props: FooterProps) => {
               >
                 <figure className="image is-24x24">
                   <img src="https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png" />
-                </figure>
-              </a>
-              <a
-                className="button"
-                href="https://www.instagram.com/d_dawg_aka_pro_chef/"
-                target="_blank"
-                style={{ padding: "4px" }}
-              >
-                <figure className="image is-24x24">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/768px-Instagram_logo_2016.svg.png" />
                 </figure>
               </a>
             </div>
