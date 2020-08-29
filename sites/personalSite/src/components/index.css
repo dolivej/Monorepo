@@ -1,0 +1,39 @@
+.mobile-subtitle {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.hideOnMobile {
+}
+
+.customPadding {
+  padding: 20px;
+}
+
+@media only screen and (max-width: 780px) {
+  .mobile-subtitle {
+    font-size: 16px;
+    margin-top: -25px;
+    line-height: 1.25;
+  }
+  .hideOnMobile {
+    display: none;
+  }
+  .customPadding {
+    padding: 0px;
+  }
+}
+
+@media only screen and (max-height: 750px) {
+  .mobile-subtitle {
+    font-size: 16px;
+    margin-top: -25px;
+    line-height: 1.25;
+  }
+  .hideOnMobile {
+    display: none;
+  }
+  .customPadding {
+    padding: 0px;
+  }
+}

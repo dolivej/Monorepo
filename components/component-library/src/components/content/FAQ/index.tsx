@@ -4,7 +4,7 @@
 / Responsiveness : Dynamic 
 */
 
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, forwardRef } from "react";
 
 export interface FAQProps {
   children: ReactNode;

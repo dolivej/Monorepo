@@ -6,3 +6,4 @@ export * from "./tags";
 export * from "./logoShowcase";
 export * from "./FAQ";
 export * from "./expandableTag";
+export * from "./slider";

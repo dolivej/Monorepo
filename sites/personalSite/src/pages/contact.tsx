@@ -12,6 +12,7 @@ import { Context, Contact } from "@locnest/component-library";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import Chatbot from "../components/Chatbot";
+import Axios from "axios";
 
 const ContactPage = () => {
   useEffect(() => {
@@ -19,6 +20,27 @@ const ContactPage = () => {
       once: true,
     });
   }, []);
+
+  const [buttonText, setButtonText] = useState("");
+
+  const handleSubmit = (data: any) => {
+    setButtonText("...Submiting");
+    let sendData = {
+      name: data.name,
+      email: data.email,
+      message: data.ContactReason + " : " + data.ContactMessage,
+    };
+    Axios.post(
+      process.env.GATSBY_EMAIL_API ? process.env.GATSBY_EMAIL_API : "",
+      sendData
+    )
+      .then((res) => {
+        setButtonText("Submited!");
+      })
+      .catch((err) => {
+        setButtonText("Failed!");
+      });
+  };
 
   return (
     <Layout>
@@ -57,10 +79,15 @@ const ContactPage = () => {
                       },
                     ],
                     onSubmit: (data: any) => {
-                      console.log(data);
+                      handleSubmit(data);
                     },
                   }}
                 />
+                <div style={{ width: "100%", textAlign: "center" }}>
+                  <p className="subtitle is-4" style={{ transition: "0.5s" }}>
+                    {buttonText}
+                  </p>
+                </div>
               </div>
 
               <div style={{ position: "sticky", bottom: "0" }}>

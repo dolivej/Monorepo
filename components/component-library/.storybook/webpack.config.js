@@ -1,35 +1,36 @@
-const path = require("path");
+const path = require('path');
 module.exports = {
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.scss$/,
         loaders: ["style-loader", "css-loader", "sass-loader"],
-        include: path.resolve(__dirname, "../"),
+        include: path.resolve(__dirname, '../')
       },
       {
         test: /\.css/,
         loaders: ["style-loader", "css-loader"],
-        include: path.resolve(__dirname, "../"),
+        include: path.resolve(__dirname, '../')
       },
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /\.js$/,
         loader: "source-map-loader",
-        exclude: [/node_modules\//],
+        exclude: [
+          /node_modules\//
+        ]
       },
       {
         test: /\.tsx?$/,
-        include: path.resolve(__dirname, "../src"),
-        loader: "awesome-typescript-loader",
+        include: path.resolve(__dirname, '../src'),
+        loader: 'awesome-typescript-loader',
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf|svg|jpe?g|png|gif|svg)$/,
-        loader: "file-loader",
-      },
-    ],
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+        loader: "file-loader"
+      }
+    ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
+    extensions: [".tsx", ".ts", ".js"]
+  }
 };

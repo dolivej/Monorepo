@@ -41,7 +41,10 @@ export const ExpandableTag = (props: ExpandableTagProps) => {
         >
           <i className={"fa " + props.picture}></i>
         </span>
-        <span className="tag" style={{ userSelect: "none" }}>
+        <span
+          className="tag"
+          style={{ userSelect: "none", backgroundColor: "whitesmoke" }}
+        >
           {props.title}
         </span>
       </div>

@@ -48,8 +48,20 @@ function SEO({ description, lang, meta, title }: any) {
           content: title,
         },
         {
+          property: `og:img`,
+          content: favicon32,
+        },
+        {
+          property: `og:url`,
+          content: "https://www.davidolive.me",
+        },
+        {
           property: `og:description`,
           content: metaDescription,
+        },
+        {
+          property: `twitter:image`,
+          content: favicon32,
         },
         {
           property: `og:type`,

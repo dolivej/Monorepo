@@ -27,9 +27,9 @@ export const Footer = (props: FooterProps) => {
             <a className="level-item" href="/experience">
               Experience
             </a>
-            <a className="level-item" href="/blog">
+            {/* <a className="level-item" href="/blog">
               Blog
-            </a>
+            </a> */}
             <a className="level-item" href="/contact">
               Contact
             </a>

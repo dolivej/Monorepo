@@ -9,6 +9,8 @@ import React from "react";
 export interface PricingProps {
   title: string;
   plans: any;
+  maxWidths?: any;
+  minWidths?: any;
 }
 export interface ItemProps {
   included?: boolean;
@@ -39,7 +41,7 @@ export const Item = (props: ItemProps) => {
         )}
 
         {!props.image && (
-          <span className="icon has-text-success">
+          <span className="icon has-text-success mobile-check">
             <i className="fas fa-check-square"></i>
           </span>
         )}
@@ -62,7 +64,7 @@ export const ItemGrouping = (props: ItemGrouping) => {
   let configuredItems = [];
   for (let i = 0; i < rows; i++) {
     configuredItems.push(
-      props.items.slice(i * props.columns, props.columns + i * props.columns)
+      props.items.slice(i * props.columns, (1 + i) * props.columns)
     );
   }
   return (
@@ -110,7 +112,10 @@ export const Pricing = (props: PricingProps) => {
         <div className="columns">
           {props.plans.map((plan: any) => {
             return (
-              <div className="column">
+              <div
+                className="column"
+                style={{ maxWidth: props.maxWidths, minWidth: props.minWidths }}
+              >
                 <div
                   className="card"
                   style={{

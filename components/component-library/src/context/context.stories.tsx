@@ -6,10 +6,9 @@ import { globalHistory } from "@reach/router";
 
 const Example = () => {
   const loggerProps = {
-    instrumentationKey: "058335e5-1838-4575-94a9-390182b9668b",
+    instrumentationKey: process.env.STORYBOOK_APPINSIGHTS_KEY,
     history: globalHistory,
   };
-
 
   return (
     <ContextProvider loggerProps={loggerProps}>
@@ -17,19 +16,27 @@ const Example = () => {
         {({ logger }: any) => {
           return (
             <div>
-              <button onClick={() => {
-                logger.loggerService.trackEvent({
-                  name : 'Clicked Button',
-                  properties: { buttonName : 'test button', group : 'test' }
-                })
-              }}>Test Button</button>
+              <button
+                onClick={() => {
+                  logger.loggerService.trackEvent({
+                    name: "Clicked Button",
+                    properties: { buttonName: "test button", group: "test" },
+                  });
+                }}
+              >
+                Test Button
+              </button>
 
-              <button onClick={() => {
-                logger.loggerService.trackEvent({
-                  name : 'SearchString',
-                  properties: { query : 'test query', group : 'test' }
-                })
-              }}>Search Param</button>
+              <button
+                onClick={() => {
+                  logger.loggerService.trackEvent({
+                    name: "SearchString",
+                    properties: { query: "test query", group: "test" },
+                  });
+                }}
+              >
+                Search Param
+              </button>
             </div>
           );
         }}

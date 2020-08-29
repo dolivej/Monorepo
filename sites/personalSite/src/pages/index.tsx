@@ -17,12 +17,15 @@ import {
   Context,
   FAQ,
   ExpandableTag,
+  Slider,
+  DataBox,
 } from "@locnest/component-library";
 
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import Timer from "../components/Timer";
 import Chatbot from "../components/Chatbot";
+import Quote from "../components/quote";
 
 export const indexPageQuery = graphql`
   query IndexPageQuery {
@@ -44,6 +47,13 @@ import exceptions from "../data/pictures/exceptions.png";
 import userFlowImg from "../data/pictures/UserFlow.png";
 import userAmount from "../data/pictures/UserAmount.png";
 import eventsAmount from "../data/pictures/eventsAmount.png";
+import user from "../data/pictures/user.svg";
+import data from "../data/pictures/data.svg";
+import learning from "../data/pictures/learning.svg";
+import siteHealthAnalytics from "../data/pictures/siteHealthAnalytics.svg";
+import userAnalytics from "../data/pictures/userAnalytics.svg";
+import example from "../data/pictures/example.svg";
+import divider2 from "../data/pictures/divider2.svg";
 
 let tagsConst = [
   {
@@ -92,7 +102,7 @@ const IndexPage = () => {
       <Context.Consumer>
         {({ logger, userFlow, setUserFlow }: any) => {
           const logButtonClick = (name: string, path: string) => {
-            setTimeout(function () {
+            setTimeout(function() {
               if (logger.loggerService) {
                 userFlow.push({
                   name: "Clicked Button",
@@ -175,7 +185,7 @@ const IndexPage = () => {
           };
 
           return (
-            <div>
+            <div style={{ backgroundColor: "white" }}>
               {logger.loggerService && (
                 <Timer runFunction={timerStart} loggerTemp={logger} />
               )}
@@ -185,122 +195,221 @@ const IndexPage = () => {
                   className="hero is-medium is-primary"
                   style={{
                     height: "90vh",
-                    width: "100vw",
-                    background: "url(" + landingImg + ") ",
+                    width: "99vw",
+                    background:
+                      "url(" + landingImg + ") no-repeat center center",
+                    WebkitBackgroundSize: "cover",
+                    MozBackgroundSize: "cover",
+                    OBackgroundSize: "cover",
                   }}
                 >
-                  <div className="hero-body">
-                    <div
-                      className="container"
-                      data-scroll
-                      style={{ padding: "20px" }}
-                    >
-                      <div
-                        className="columns mobileContainer"
-                        style={{
-                          backgroundColor: "white",
-                          marginRight: "10px",
-                          paddingTop: "20px",
-                          paddingBottom: "20px",
-                        }}
-                      >
+                  <Slider
+                    color="white"
+                    thickness="2px"
+                    slides={[
+                      <div className="hero-body-custom">
                         <div
-                          className="column is-5 mobileCenter"
-                          style={{
-                            textAlign: "center",
-                          }}
+                          className="container"
+                          data-scroll
+                          style={{ padding: "20px" }}
                         >
-                          <img
-                            src={Profile}
-                            className="imgMobile"
-                            style={{
-                              border: "solid 1px white",
-                              boxShadow: "2px 4px 23px -1px rgba(0,0,0,0.2)",
-                            }}
-                          />
-                        </div>
-                        <div className="column">
                           <div
-                            className="landingText"
+                            className="columns mobileContainer"
                             style={{
-                              height: "300px",
+                              backgroundColor: "white",
+                              paddingTop: "20px",
+                              paddingBottom: "20px",
+                              borderRadius: "5px",
                             }}
                           >
-                            <h1
-                              className="title is-1"
-                              style={{ color: "black" }}
+                            <div
+                              className="column is-5 mobileCenter"
+                              style={{
+                                textAlign: "center",
+                              }}
                             >
-                              Hi, im David.
-                            </h1>
-                            <br />
-                            <h2
-                              className="subtitle is-3"
-                              style={{ color: "black", marginTop: "-20px" }}
-                            >
-                              Data driven development. 🧍 ➡ 📊 ➡ 👨‍💻
-                            </h2>
-                            <div className="columns">
+                              <img
+                                src={Profile}
+                                className="imgMobile"
+                                style={{
+                                  border: "solid 1px white",
+                                  boxShadow:
+                                    "2px 4px 23px -1px rgba(0,0,0,0.2)",
+                                }}
+                              />
+                            </div>
+                            <div className="column">
                               <div
-                                className="column is-2"
-                                style={{ minWidth: "135px" }}
+                                className="landingText"
+                                style={{
+                                  height: "300px",
+                                }}
                               >
-                                {typeof window !== "undefined" && ScrollLink && (
-                                  <ScrollLink
-                                    activeClass="projects"
-                                    to="projects"
-                                    spy={true}
-                                    smooth={true}
-                                    offset={100}
-                                    duration={1000}
+                                <h1
+                                  className="title is-1"
+                                  style={{ color: "black" }}
+                                >
+                                  Hi, im David.
+                                </h1>
+                                <br />
+                                <h2
+                                  className="subtitle is-3"
+                                  style={{ color: "black", marginTop: "-20px" }}
+                                >
+                                  <b
+                                    className="is-primary-background"
+                                    style={{
+                                      padding: "5px",
+                                      lineHeight: 1.3,
+                                    }}
                                   >
-                                    <button
-                                      className="is-primary is-rounded button"
-                                      onClick={() => {
-                                        logButtonClick(
-                                          "landing-projects",
-                                          "/#projects"
-                                        );
-                                      }}
-                                    >
-                                      My Work
-                                    </button>
-                                  </ScrollLink>
-                                )}
-                              </div>
-
-                              <div
-                                className="column is-2"
-                                style={{ minWidth: "135px" }}
-                              >
-                                {typeof window !== "undefined" && ScrollLink && (
-                                  <ScrollLink
-                                    activeClass="skills"
-                                    to="skills"
-                                    spy={true}
-                                    smooth={true}
-                                    offset={100}
-                                    duration={1000}
+                                    User Focused and Data Driven.
+                                  </b>
+                                </h2>
+                                <div className="columns">
+                                  <div
+                                    className="column is-2"
+                                    style={{ minWidth: "135px" }}
                                   >
-                                    <button
-                                      className="is-primary is-rounded button is-outlined"
-                                      onClick={() => {
-                                        logButtonClick(
-                                          "landing-skills",
-                                          "/#skills"
-                                        );
-                                      }}
-                                    >
-                                      My Skills
-                                    </button>
-                                  </ScrollLink>
-                                )}
+                                    {typeof window !== "undefined" &&
+                                      ScrollLink && (
+                                        <ScrollLink
+                                          activeClass="skills"
+                                          to="skills"
+                                          spy={true}
+                                          smooth={true}
+                                          offset={100}
+                                          duration={1000}
+                                        >
+                                          <button
+                                            className="is-primary is-rounded button"
+                                            onClick={() => {
+                                              logButtonClick(
+                                                "landing-skills",
+                                                "/#skills"
+                                              );
+                                            }}
+                                          >
+                                            My Skills
+                                          </button>
+                                        </ScrollLink>
+                                      )}
+                                  </div>
+                                  <div
+                                    className="column is-2"
+                                    style={{ minWidth: "135px" }}
+                                  >
+                                    {typeof window !== "undefined" &&
+                                      ScrollLink && (
+                                        <ScrollLink
+                                          activeClass="projects"
+                                          to="projects"
+                                          spy={true}
+                                          smooth={true}
+                                          offset={100}
+                                          duration={1000}
+                                        >
+                                          <button
+                                            className="is-primary is-rounded button is-outlined"
+                                            onClick={() => {
+                                              logButtonClick(
+                                                "landing-projects",
+                                                "/#projects"
+                                              );
+                                            }}
+                                          >
+                                            My Projects
+                                          </button>
+                                        </ScrollLink>
+                                      )}
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
+                      </div>,
+                      <div
+                        className="hero-body-custom"
+                        style={{ marginTop: "-60px" }}
+                      >
+                        <Quote
+                          name="Brandon Yanuziello"
+                          img="https://mma.prnewswire.com/media/944656/Locnest_Is_Toronto_the_next_Switzerland____Locnest_says_Yes___an.jpg?p=twitter"
+                          quote={
+                            <p>
+                              One of the best things about David is his{" "}
+                              <b
+                                style={{
+                                  backgroundColor: "#fad052",
+                                }}
+                              >
+                                ability to understand business value
+                              </b>{" "}
+                              and how technology helps drive that value . With
+                              minimal requirements and design he was{" "}
+                              <b style={{ backgroundColor: "#fad052" }}>
+                                able to produce high quality components and
+                                delivered a vast array of features that will
+                                help us drive our business forward.
+                              </b>{" "}
+                            </p>
+                          }
+                          title="Locnest - Senior Developer"
+                        />
+                      </div>,
+                      <div
+                        className="hero-body-custom"
+                        style={{ marginTop: "-60px" }}
+                      >
+                        <Quote
+                          name="Chris Lynk"
+                          img="https://pbs.twimg.com/profile_images/1267848304093691904/w5v5Ny_F_400x400.png"
+                          quote={
+                            <p>
+                              David is{" "}
+                              <b style={{ backgroundColor: "#fad052" }}>
+                                an excellent learner and was able to come up to
+                                speed quickly
+                              </b>{" "}
+                              on the various technologies we work with despite
+                              being a relatively junior co-op student. He{" "}
+                              <b style={{ backgroundColor: "#fad052" }}>
+                                integrated well into our office culture and was
+                                able to leverage the relationships he has built
+                              </b>{" "}
+                              to progress on his objectives.
+                            </p>
+                          }
+                          title="IBM Cloud - Platform UI Development Manager"
+                        />
+                      </div>,
+                      <div
+                        className="hero-body-custom"
+                        style={{ marginTop: "-60px" }}
+                      >
+                        <Quote
+                          name="Jason Zhang"
+                          img="https://www.imaginecommunications.com/sites/default/files/media-images/imagine_running_man.png"
+                          quote={
+                            <p>
+                              David showed{" "}
+                              <b style={{ backgroundColor: "#fad052" }}>
+                                excellent performance
+                              </b>{" "}
+                              during his work term. He understood his job duties
+                              and picked up the skills/technology very quickly
+                              and was{" "}
+                              <b style={{ backgroundColor: "#fad052" }}>
+                                able to complete tasks with a little guidelines.
+                              </b>
+                            </p>
+                          }
+                          title="Imagine Communications - Senior Developer"
+                        />
+                      </div>,
+                    ]}
+                  />
                 </section>
               </div>
 
@@ -318,27 +427,59 @@ const IndexPage = () => {
                     margin: "0 auto",
                     borderTop: "solid 1px #fad052",
                     borderBottom: "solid 1px #fad052",
-                    padding: "5vw",
+                    padding: "3vw",
                   }}
                 >
                   <div id="aboutText" data-scroll>
-                    <h3 className="title is-2">🧍 About Me</h3>
-                    <p>
-                      Hi, I'm David. I am currently studying Systems Design
-                      Engineering at the University of Waterloo. As part of my
-                      program I can complete 6 internship placements to learn
-                      through doing, I have already completed three in various
-                      roles such as Front-End Architect, Full-Stack Developer
-                      and QA Software Developer and am excited for the next
-                      three.
-                      <br />
-                      <br />
-                      <strong>
-                        I have citizenship in the USA/Canada and am interested
-                        in 4-month internships in the field of Product/Analytics
-                        or Full-Stack/Front-End Development.
-                      </strong>
-                    </p>
+                    <h3 className="title is-2">About Me</h3>
+                    <section className="section">
+                      <div className="container has-text-centered py-4">
+                        <div className="columns">
+                          <div className="column">
+                            <div className="level">
+                              <div className="level-item">
+                                <figure className="image is-128x128">
+                                  <img src={user} alt="" />
+                                </figure>
+                              </div>
+                            </div>
+                            <h4 className="title is-4">User Focused</h4>
+                            <p className="block">
+                              In my eyes the key to a great product lies within
+                              a great understanding of the user.
+                            </p>
+                          </div>
+                          <div className="column">
+                            <div className="level">
+                              <div className="level-item">
+                                <figure className="image is-128x128">
+                                  <img src={data} alt="" />
+                                </figure>
+                              </div>
+                            </div>
+                            <h4 className="title is-4">Data Driven</h4>
+                            <p className="block">
+                              I love to unlock insights within data and use data
+                              to guide decisions and validate success!
+                            </p>
+                          </div>
+                          <div className="column">
+                            <div className="level">
+                              <div className="level-item">
+                                <figure className="image is-128x128">
+                                  <img src={learning} alt="" />
+                                </figure>
+                              </div>
+                            </div>
+                            <h4 className="title is-4">Always Growing</h4>
+                            <p className="block">
+                              The more I learn, the more I realize how little I
+                              know. Every day I improve.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
                   </div>
 
                   <div
@@ -357,9 +498,9 @@ const IndexPage = () => {
 
               <div
                 style={{
-                  background: "url(" + divider + ") no-repeat center center",
+                  background: "url(" + divider2 + ") no-repeat center center",
                   backgroundSize: "cover",
-                  height: "1700px",
+                  height: "1300px",
                   width: "100%",
                   overflow: "hidden",
                   WebkitBackgroundSize: "cover",
@@ -374,7 +515,7 @@ const IndexPage = () => {
                   <div
                     style={{
                       width: "100%",
-                      height: "1700px",
+                      height: "1200px",
                       marginTop: "20px",
                       paddingBottom: "70px",
                       marginBottom: "20px",
@@ -394,7 +535,7 @@ const IndexPage = () => {
                         borderRadius: "7px",
                       }}
                     >
-                      📁 My Work
+                      Projects
                     </h1>
                     <div
                       data-scroll
@@ -403,12 +544,10 @@ const IndexPage = () => {
                         width: "100%",
                         display: "inline-block",
                         maxWidth: "1175px",
-                        backgroundColor: "lightgray",
-                        borderRadius: "10px",
                       }}
                     >
                       <Collection
-                        sizemap="'a b' 'a b' 'c d' 'c d'"
+                        sizemap="'a b' 'a b'"
                         minMobileHeight="520px"
                         data={[
                           {
@@ -443,38 +582,6 @@ const IndexPage = () => {
                             },
                             gridId: "b",
                           },
-                          {
-                            data: {
-                              tags: tagsConst,
-                              image:
-                                "https://zippypixels.com/wp-content/uploads/2015/09/01-Free-perspective-website-mockup-824x542.jpg",
-                              brief: "Brief Description",
-                              title: "Project Name",
-                              about:
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                              links: [
-                                { text: "Read More", link: "link" },
-                                { text: "Github", link: "link" },
-                              ],
-                            },
-                            gridId: "c",
-                          },
-                          {
-                            data: {
-                              tags: tagsConst,
-                              image:
-                                "https://i.ibb.co/3ymCTtR/screely-1597791281981.png",
-                              brief: "Unlocking insights.",
-                              title: "Analytics",
-                              about:
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-                              links: [
-                                { text: "Read More", link: "link" },
-                                { text: "Github", link: "link" },
-                              ],
-                            },
-                            gridId: "d",
-                          },
                         ]}
                         spacing={"20px"}
                         template={Template}
@@ -503,9 +610,7 @@ const IndexPage = () => {
                   data-scroll
                 >
                   <div style={{ maxWidth: "1100px", marginBottom: "100px" }}>
-                    <h3 className="title is-2" style={{ color: "#fad052" }}>
-                      📊 Site Analytics
-                    </h3>
+                    <h3 className="title is-2">Site Analytics</h3>
                     <p>
                       After working on the analytics team at IBM I came to
                       realize the buisness value that analytics provide. Being
@@ -524,7 +629,7 @@ const IndexPage = () => {
                   </div>
 
                   <FAQ
-                    picture="https://cdn2.iconfinder.com/data/icons/ux-process-filled-outline/64/user_testing-usability_testing-test-hand-click-interface-ux-128.png"
+                    picture={userAnalytics}
                     title="User Flow Analytics"
                     data-scroll
                   >
@@ -577,7 +682,7 @@ const IndexPage = () => {
                     </section>
                   </FAQ>
                   <FAQ
-                    picture="https://simpleicon.com/wp-content/uploads/Code-Optimization-2-256x256.png"
+                    picture={siteHealthAnalytics}
                     title="Site Health Analytics"
                     data-scroll
                   >
@@ -631,7 +736,7 @@ const IndexPage = () => {
                     </div>
                   </FAQ>
                   <FAQ
-                    picture="https://www.shareicon.net/data/256x256/2016/02/28/726264_arrows_512x512.png"
+                    picture={example}
                     title="Example: Your Live User Flow"
                     data-scroll
                   >
@@ -646,26 +751,28 @@ const IndexPage = () => {
                       <section className="info-tiles">
                         <div className="tile is-ancestor has-text-centered">
                           <div className="tile is-parent">
-                            <article className="tile is-child box">
-                              <p className="title">
-                                "{getMax(userFlow, "views").name}"
-                              </p>
-                              <p className="subtitle">
-                                Most Viewed Section :{" "}
-                                {getMax(userFlow, "views").value} Views
-                              </p>
-                            </article>
+                            <DataBox
+                              title="Most Viewed Section"
+                              timeFrame="This Session"
+                              isNegative={false}
+                              value={"" + getMax(userFlow, "views").name}
+                              subtitle="Number of Views (Sum)"
+                              showArrow={false}
+                              subValue={"" + getMax(userFlow, "views").value}
+                            />
                           </div>
                           <div className="tile is-parent">
-                            <article className="tile is-child box">
-                              <p className="title">
-                                "{getMax(userFlow, "time").name}"
-                              </p>
-                              <p className="subtitle">
-                                Longest Viewed Section (average):{" "}
-                                {getMax(userFlow, "time").value} Seconds
-                              </p>
-                            </article>
+                            <DataBox
+                              title="Longest Viewed Section"
+                              timeFrame="This Session"
+                              isNegative={false}
+                              value={"" + getMax(userFlow, "time").name}
+                              subtitle="Time Viewed (Max)"
+                              showArrow={false}
+                              subValue={
+                                "" + getMax(userFlow, "time").value + " seconds"
+                              }
+                            />
                           </div>
                         </div>
                       </section>

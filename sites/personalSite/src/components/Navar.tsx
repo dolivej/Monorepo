@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import Link from "gatsby-link";
 import {
   Nav,
   NavProps,
@@ -17,7 +17,7 @@ export default function Navbar() {
     <Context.Consumer>
       {({ logger, userFlow, setUserFlow }: any) => {
         const logNavClick = (path: string) => {
-          setTimeout(function () {
+          setTimeout(function() {
             userFlow.push({
               name: "Clicked Nav",
               properties: { path: path, group: "test" },
@@ -38,9 +38,9 @@ export default function Navbar() {
                   title="About"
                   toFunc={() => {
                     return (
-                      <Link to="/" style={{ color: "black" }}>
+                      <a href="/" style={{ color: "black" }}>
                         <h1>About</h1>
-                      </Link>
+                      </a>
                     );
                   }}
                 >
@@ -76,7 +76,7 @@ export default function Navbar() {
                     {(windowIsOnPath("blog") ||
                       windowIsOnPath("contact") ||
                       windowIsOnPath("experience")) && (
-                      <Link to="/#skills">
+                      <a href="/#skills">
                         <h2
                           className=""
                           style={{ color: "#4a4a4a" }}
@@ -86,7 +86,7 @@ export default function Navbar() {
                         >
                           Skills
                         </h2>
-                      </Link>
+                      </a>
                     )}
                   </NavLink>
                   <NavLink>
@@ -113,7 +113,7 @@ export default function Navbar() {
                               logNavClick("/#projects");
                             }}
                           >
-                            My Work
+                            Projects
                           </h2>
                         </ScrollLink>
                       )}
@@ -121,7 +121,7 @@ export default function Navbar() {
                     {(windowIsOnPath("blog") ||
                       windowIsOnPath("contact") ||
                       windowIsOnPath("experience")) && (
-                      <Link to="/#projects">
+                      <a href="/#projects">
                         <h2
                           className=""
                           style={{ color: "#4a4a4a" }}
@@ -129,9 +129,9 @@ export default function Navbar() {
                             logNavClick("/#projects");
                           }}
                         >
-                          My Work
+                          Projects
                         </h2>
-                      </Link>
+                      </a>
                     )}
                   </NavLink>
                   <NavLink>
@@ -166,7 +166,7 @@ export default function Navbar() {
                     {(windowIsOnPath("blog") ||
                       windowIsOnPath("contact") ||
                       windowIsOnPath("experience")) && (
-                      <Link to="/#analytics">
+                      <a href="/#analytics">
                         <h2
                           className=""
                           style={{ color: "#4a4a4a" }}
@@ -176,7 +176,7 @@ export default function Navbar() {
                         >
                           Analytics
                         </h2>
-                      </Link>
+                      </a>
                     )}
                   </NavLink>
                 </NavHover>
@@ -184,12 +184,51 @@ export default function Navbar() {
                   title="Experience"
                   toFunc={() => {
                     return (
-                      <Link to="/experience" style={{ color: "black" }}>
+                      <a href="/experience" style={{ color: "black" }}>
                         <h1>Experience</h1>
-                      </Link>
+                      </a>
                     );
                   }}
                 >
+                  <NavLink>
+                    {typeof window !== "undefined" &&
+                      ScrollLink &&
+                      windowIsOnPath("experience") && (
+                        <ScrollLink
+                          activeClass="testimonials"
+                          to="testimonials"
+                          spy={true}
+                          smooth={true}
+                          offset={100}
+                          duration={1000}
+                        >
+                          {" "}
+                          <h2
+                            className=""
+                            style={{ color: "#4a4a4a" }}
+                            onClick={() => {
+                              logNavClick("/experience/#testimonials");
+                            }}
+                          >
+                            Testimonials
+                          </h2>
+                        </ScrollLink>
+                      )}
+
+                    {!windowIsOnPath("experience") && (
+                      <a href="/experience/#testimonials">
+                        <h2
+                          className=""
+                          style={{ color: "#4a4a4a" }}
+                          onClick={() => {
+                            logNavClick("/experience/#testimonials");
+                          }}
+                        >
+                          Testimonials
+                        </h2>
+                      </a>
+                    )}
+                  </NavLink>
                   <NavLink>
                     {typeof window !== "undefined" &&
                       ScrollLink &&
@@ -216,7 +255,7 @@ export default function Navbar() {
                       )}
 
                     {!windowIsOnPath("experience") && (
-                      <Link to="/experience/#workhistory">
+                      <a href="/experience/#workhistory">
                         <h2
                           className=""
                           style={{ color: "#4a4a4a" }}
@@ -226,10 +265,11 @@ export default function Navbar() {
                         >
                           Work History
                         </h2>
-                      </Link>
+                      </a>
                     )}
                   </NavLink>
-                  <NavLink>
+                  <NavLink></NavLink>
+                  {/* <NavLink>
                     {typeof window !== "undefined" &&
                       ScrollLink &&
                       windowIsOnPath("experience") && (
@@ -255,7 +295,7 @@ export default function Navbar() {
                       )}
 
                     {!windowIsOnPath("experience") && (
-                      <Link to="/experience/#resume">
+                      <a href="/experience/#resume">
                         <h2
                           className=""
                           style={{ color: "#4a4a4a" }}
@@ -265,17 +305,17 @@ export default function Navbar() {
                         >
                           Resume
                         </h2>
-                      </Link>
+                      </a>
                     )}
-                  </NavLink>
+                  </NavLink> */}
                 </NavHover>
-                <NavLink>
+                {/* <NavLink>
                   <Link to="/blog" style={{ color: "black" }}>
                     Blog
                   </Link>
-                </NavLink>
+                </NavLink> */}
                 <NavButton>
-                  <Link to="/contact">
+                  <a href="/contact">
                     <div
                       className="button is-primary is-rounded is-outlined"
                       onClick={() => {
@@ -287,7 +327,7 @@ export default function Navbar() {
                         <b>Contact</b>
                       </h2>
                     </div>
-                  </Link>
+                  </a>
                 </NavButton>
               </NavGroup>
             </NavGroup>

@@ -19,7 +19,13 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts'
     border-radius: 20px
 
 
+.sliderButton
+    background-color: transparent
+    font-size: 20px
+    outline: none
 
+.sliderButton:hover
+    background-color: white
 
 //-------------------------------------------------------//
 
@@ -29,5 +35,30 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts'
 +tablet-only
 
 +mobile
+    .sliderButton
+        font-size: 2vw
+    .popup-chat-widget-container 
+        position: relative
+        height: 70vh
+        width: 90vw
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 20px
+        background: rgb(255, 255, 255)
+        border-radius: 8px
+        margin-bottom: 70px
+        max-width: 320px
+        max-height: 530px
+    .popup-message-container 
+        display: flex
+        flex-direction: column
+        padding-left: 10px
+        height: 45vh
+        max-height: 405px
+        font-size: 14px
+        overflow-y: scroll
+        overflow-x: hidden
+    .mobile-check
+        display: none
+
+
 
 

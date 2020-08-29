@@ -33,7 +33,10 @@ export const Tag = (props: TagProps) => {
   return (
     <div style={{ display: "inline-block" }}>
       <a className="tags has-addons">
-        <span className={"tag " + size}>
+        <span
+          className={"tag " + size}
+          style={{ backgroundColor: "whitesmoke" }}
+        >
           <figure className={"image " + sizePicture}>
             <img src={props.icon} />
           </figure>

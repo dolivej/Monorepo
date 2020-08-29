@@ -3,7 +3,9 @@ import backend from "./pictures/backend.svg";
 import frontend from "./pictures/frontend.svg";
 
 export const mySkills = {
-  title: "My Skillset",
+  title: "Technical Skills",
+  maxWidths: "100%",
+  minWidths: "33%",
   plans: [
     {
       img: frontend,
@@ -15,13 +17,39 @@ export const mySkills = {
       callToActionLink: "#projects",
       groups: [
         {
-          title: "Frameworks",
-          columns: "3",
+          title: "Languages",
+          columns: "2",
           items: [
             {
-              text: "React",
+              text: "JavaScript",
             },
-            { text: "Gatsby" },
+            { text: "TypeScript" },
+            { text: "HTML" },
+            { text: "CSS" },
+          ],
+        },
+        {
+          title: "Frameworks",
+          columns: "2",
+          items: [
+            {
+              text: "React.js",
+            },
+            { text: "Gatsby.js" },
+            { text: "Storybook.js" },
+          ],
+        },
+        {
+          title: "Techniques",
+          columns: "2",
+          items: [
+            {
+              text: "Atomic Design",
+            },
+            { text: "Monorepos" },
+            { text: "Multi-Language" },
+            { text: "Reusable Design" },
+            { text: "Component Library Design" },
           ],
         },
       ],
@@ -36,9 +64,27 @@ export const mySkills = {
       callToActionLink: "#projects",
       groups: [
         {
+          title: "Languages",
+          columns: "2",
+          items: [{ text: "Node.js" }],
+        },
+        {
           title: "Frameworks",
-          columns: "3",
-          items: [{ text: "Express" }],
+          columns: "2",
+          items: [{ text: "Express.js" }],
+        },
+        {
+          title: "Tools/Services",
+          columns: "2",
+          items: [
+            { text: "Postman" },
+            { text: "SendGrid" },
+            { text: "IBM Functions" },
+            { text: "Azure Functions" },
+            { text: "REST Api's" },
+            { text: "SQL/MongoDB" },
+            { text: "Middlewear" },
+          ],
         },
       ],
     },
@@ -52,9 +98,19 @@ export const mySkills = {
       callToActionLink: "#analytics",
       groups: [
         {
-          title: "Frameworks",
-          columns: "3",
-          items: [{ text: "AppInsights" }],
+          title: "Analytics Services",
+          columns: "2",
+          items: [
+            { text: "Amplitude" },
+            { text: "Segment" },
+            { text: "App Insights" },
+            { text: "New Relic" },
+          ],
+        },
+        {
+          title: "SEO",
+          columns: "2",
+          items: [{ text: "Multi-Language" }, { text: "Backlinks" }],
         },
       ],
     },

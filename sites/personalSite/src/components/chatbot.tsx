@@ -71,7 +71,7 @@ class Chatbot extends React.Component<
   addMessage = (message: any) => {
     let messagesHolder = this.state.messageList;
     messagesHolder.push("R:" + message);
-    console.log(messagesHolder);
+    //console.log(messagesHolder);
     this.setState({ messageList: messagesHolder, message: "" });
     Axios.post(
       "https://dolivejchatbotapi.us-south.cf.appdomain.cloud/api/message",
