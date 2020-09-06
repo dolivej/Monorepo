@@ -62,10 +62,12 @@ export const Slider = (props: SliderProps) => {
       >
         {props.slides.map((item: any, index: number) => {
           return (
+
             <div
               className="column fade-in"
               style={{
                 padding: "0px",
+                margin: '-1px'
               }}
             >
               <button
@@ -78,12 +80,14 @@ export const Slider = (props: SliderProps) => {
                   cursor: "pointer",
                   transition: "0.5s",
                   backgroundColor: -(100 * index) === x ? "white" : "",
+                  padding: '0px'
                 }}
                 onClick={() => {
                   setX(-(100 * index));
                 }}
               ></button>
             </div>
+
           );
         })}
       </div>

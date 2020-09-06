@@ -24,7 +24,7 @@ const ContactPage = () => {
   const [buttonText, setButtonText] = useState("");
 
   const handleSubmit = (data: any) => {
-    setButtonText("...Submiting");
+    setButtonText("...Submitting");
     let sendData = {
       name: data.name,
       email: data.email,
@@ -35,7 +35,7 @@ const ContactPage = () => {
       sendData
     )
       .then((res) => {
-        setButtonText("Submited!");
+        setButtonText("Submitted!");
       })
       .catch((err) => {
         setButtonText("Failed!");
@@ -56,7 +56,7 @@ const ContactPage = () => {
               <div style={{ minHeight: "55vh" }}>
                 <Contact
                   contactData={{
-                    title: "I am always open to a new oppertunity!",
+                    title: "I am always open to a new opportunity!",
                     subtitle:
                       "Feel free to reach out if you are interested in my skills, projects or just want to talk.",
                     options: [

@@ -42,7 +42,7 @@ export const FAQ = (props: FAQProps) => {
                 </div>
                 <div className="media-content" style={{ overflow: "hidden" }}>
                   <h3
-                    className="title is-3"
+                    className="title mobileTitle"
                     style={{ userSelect: "none", overflow: "hidden" }}
                   >
                     {props.title}

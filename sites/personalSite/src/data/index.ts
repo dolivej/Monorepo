@@ -11,7 +11,7 @@ export const mySkills = {
       img: frontend,
       title: "Front End (React/Gatsby)",
       description:
-        "I excell at developing reusable, functional and beautiful components/sites.",
+        "I excel at developing reusable, functional and beautiful components/sites.",
       price: "",
       callToAction: "See Examples",
       callToActionLink: "#projects",
@@ -90,7 +90,7 @@ export const mySkills = {
     },
     {
       img: analytics,
-      title: "Analytics (Azure)",
+      title: "Analytics",
       description:
         "I am passionate about all things analytics and also topics like SEO.",
       price: "",

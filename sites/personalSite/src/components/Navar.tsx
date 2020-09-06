@@ -229,13 +229,14 @@ export default function Navbar() {
                       </a>
                     )}
                   </NavLink>
+                  <NavLink></NavLink>
                   <NavLink>
                     {typeof window !== "undefined" &&
                       ScrollLink &&
                       windowIsOnPath("experience") && (
                         <ScrollLink
-                          activeClass="workhistory"
-                          to="workhistory"
+                          activeClass="testimonials"
+                          to="testimonials"
                           spy={true}
                           smooth={true}
                           offset={100}
@@ -249,7 +250,7 @@ export default function Navbar() {
                               logNavClick("/experience/#workhistory");
                             }}
                           >
-                            Work History
+                            Resume
                           </h2>
                         </ScrollLink>
                       )}
@@ -263,12 +264,11 @@ export default function Navbar() {
                             logNavClick("/experience/#workhistory");
                           }}
                         >
-                          Work History
+                          Resume
                         </h2>
                       </a>
                     )}
                   </NavLink>
-                  <NavLink></NavLink>
                   {/* <NavLink>
                     {typeof window !== "undefined" &&
                       ScrollLink &&
