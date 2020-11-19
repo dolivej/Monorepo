@@ -13,7 +13,9 @@ const Layout = ({ children }: any) => {
   return (
     <>
       <ContextProvider loggerProps={loggerProps}>
+        <div style={{width:'100vw', position:'sticky', top:'0', zIndex:'5'}}>
         <NavBar />
+        </div>
         <main>{children}</main>
         <Footer />
       </ContextProvider>

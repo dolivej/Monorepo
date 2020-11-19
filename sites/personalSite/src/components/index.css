@@ -10,6 +10,44 @@
   padding: 20px;
 }
 
+.projectCard {
+  height: 70vh;
+  width: 100%;
+  background-position: center;
+  background-image: url(../data/pictures/testback.jpg);
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.projectCard:hover {
+  transform: scale(1.2);
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.projectCardOverlay {
+  height: 70vh;
+  width: 100%;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.projectCardOverlay:hover {
+  background-color: rgba(56, 54, 32, 0.75);
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.readMore {
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden;
+}
+
+.readMore:hover {
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  transform: scale(1.1);
+  overflow: hidden;
+  -webkit-box-shadow: 10px 10px 59px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 59px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 59px -5px rgba(0, 0, 0, 0.75);
+}
+
 @media only screen and (max-width: 780px) {
   .mobile-subtitle {
     font-size: 16px;
